@@ -2,8 +2,8 @@ const DarkTheme = {
   dark: true,
   colors: {
     primary: "rgb(58, 131, 247)",
-    background: "rgb(18, 18, 18)",
-    card: "rgb(18, 18, 18)",
+    background: "rgb(0, 0, 0)",
+    card: "rgb(0, 0, 0)",
     text: "rgb(254, 254, 254)",
     border: "rgb(39, 39, 41)",
     seperator: "rgb(47, 47, 49)",
