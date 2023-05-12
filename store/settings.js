@@ -15,6 +15,16 @@ const initialState = new SettingSection("PREFERRED LANGUAGES", [
     new SettingOption("US", "us"),
     new SettingOption("UK", "uk"),
   ]),
+  new Setting("ms2", "Measurement System 2", "us", [
+    new SettingOption("Metric", "m"),
+    new SettingOption("US", "us"),
+    new SettingOption("UK", "uk"),
+  ]),
+  new Setting("ms3", "Measurement System 3", "us", [
+    new SettingOption("Metric", "m"),
+    new SettingOption("US", "us"),
+    new SettingOption("UK", "uk"),
+  ]),
 ]);
 
 const settingsSlice = createSlice({

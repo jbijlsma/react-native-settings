@@ -1,9 +1,24 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+import { useSelector } from "react-redux";
+
+import OptionGroup from "../components/OptionGroup";
+import { useTheme } from "../theme/useTheme";
 
 function HomeScreen() {
+  const [theme] = useTheme();
+  const section = useSelector((state) => state.settingsSlice.section);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+      <Text
+        style={[styles.sectionHeader, { color: theme.colors.sectionHeader }]}
+      >
+        {section.title.toUpperCase()}
+      </Text>
+
+      <View>
+        <OptionGroup settings={section.settings} />
+      </View>
     </View>
   );
 }
@@ -11,12 +26,12 @@ function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    padding: 16,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
+  sectionHeader: {
+    marginLeft: 20,
+    fontSize: 14,
+    marginBottom: 8,
   },
 });
 

@@ -15,11 +15,11 @@ export default function App() {
         </Pressable>
         <Pressable
           style={({ pressed }) => [
-            styles.outerBox2,
+            styles.outerBox4,
             pressed && { backgroundColor: "#ababab", zIndex: 1000 },
           ]}
         >
-          <View style={styles.innerBox2} />
+          <View style={styles.innerBox4} />
         </Pressable>
       </View>
     </View>
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: "#bababa",
   },
-  outerBox2: {
+  outerBox4: {
     position: "absolute",
     width: "100%",
     height: 50,
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#ededed",
     overflow: "hidden",
   },
-  innerBox2: {
+  innerBox4: {
     marginLeft: 12,
     width: "100%",
     height: "100%",
