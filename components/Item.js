@@ -1,28 +1,16 @@
-import { StyleSheet, Pressable, View, Text } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Pressable, View } from "react-native";
 
 import { useTheme } from "../theme/useTheme";
 
-function OptionGroupItem({
-  setting,
+function Item({
+  item,
   index,
   hasPrevSibbling,
   hasNextSibbling,
-  icon,
+  onPress,
+  children,
 }) {
   const [theme] = useTheme();
-
-  function capitalizeFirstLetter(word) {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }
-
-  function getSelectedOptionTitle(setting) {
-    var title = setting.options.find(
-      (option) => option.value === setting.value
-    ).title;
-
-    return capitalizeFirstLetter(title);
-  }
 
   function getPressableBorderRadiusStyle(hasPrevSibbling, hasNextSibbling) {
     const borderRadius = 12;
@@ -54,13 +42,10 @@ function OptionGroupItem({
     hasNextSibbling
   );
   const top = index * outerBoxHeight - index;
-  const displayValue = getSelectedOptionTitle(setting);
-  const value = setting.value;
-  const iconName = "chevron-forward-outline";
 
   return (
     <Pressable
-      key={setting.name}
+      onPress={onPress.bind(this, item)}
       style={({ pressed }) => [
         styles.outerBox,
         pressableBorderRadius,
@@ -85,32 +70,7 @@ function OptionGroupItem({
             },
         ]}
       >
-        <View style={styles.settingContainer}>
-          <Text
-            style={[
-              styles.settingTitle,
-              { color: theme.colors.sectionSettingText },
-            ]}
-          >
-            {setting.title}
-          </Text>
-          <View style={styles.settingValueContainer}>
-            {displayValue && (
-              <Text style={{ color: theme.colors.sectionSettingValue }}>
-                {displayValue}
-              </Text>
-            )}
-            {icon
-              ? icon(value)
-              : iconName && (
-                  <Ionicons
-                    name={iconName}
-                    color={theme.colors.sectionSettingValue}
-                    size={22}
-                  />
-                )}
-          </View>
-        </View>
+        <View style={styles.settingContainer}>{children}</View>
       </View>
     </Pressable>
   );
@@ -137,13 +97,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  settingTitle: {
-    fontSize: 16,
-  },
-  settingValueContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
 });
 
-export default OptionGroupItem;
+export default Item;

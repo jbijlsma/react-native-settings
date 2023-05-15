@@ -1,5 +1,6 @@
-export function Setting(name, title, value, options) {
+export function Setting(type, name, title, value, options) {
   return {
+    type: type,
     name: name,
     title: title,
     value: value,

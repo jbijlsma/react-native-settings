@@ -3,7 +3,7 @@
     "name": "settings",
     "slug": "settings",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "auto",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "auto",
     "splash": {

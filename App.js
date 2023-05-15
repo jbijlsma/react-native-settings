@@ -7,11 +7,11 @@ import { Ionicons } from "@expo/vector-icons";
 import { Provider } from "react-redux";
 
 import { store } from "./store/store";
-import SettingsScreen from "./screens/SettingsScreen";
+import SettingListScreen from "./screens/SettingListScreen";
 import { useTheme } from "./theme/useTheme";
 import { createStackNavigator } from "@react-navigation/stack";
-import SettingScreen from "./screens/SettingScreen";
 import HomeScreen from "./screens/HomeScreen";
+import SettingOptionsScreen from "./screens/SettingOptionsScreen";
 
 export default function App() {
   const [theme] = useTheme();
@@ -22,15 +22,15 @@ export default function App() {
     return (
       <Stack.Navigator>
         <Stack.Screen
-          name="SettingsScreen"
-          component={SettingsScreen}
+          name="SettingListScreen"
+          component={SettingListScreen}
           options={{
             title: "Settings",
           }}
         />
         <Stack.Screen
-          name="SettingScreen"
-          component={SettingScreen}
+          name="SettingOptionsScreen"
+          component={SettingOptionsScreen}
         />
       </Stack.Navigator>
     );
@@ -45,6 +45,7 @@ export default function App() {
             name="Home"
             component={HomeScreen}
             options={{
+              headerShown: false,
               tabBarIcon: ({ color, size }) => (
                 <Ionicons
                   name="home-outline"

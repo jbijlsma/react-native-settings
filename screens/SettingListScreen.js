@@ -1,18 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useTheme } from "../theme/useTheme";
 
-import { SettingsGroup } from "../components/SettingsGroup";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+import ItemGroup from "../components/ItemGroup";
 
-function SettingsScreen() {
+function SettingListScreen() {
   const [theme] = useTheme();
   const navigation = useNavigation();
 
   function settingPressHandler(setting) {
-    navigation.navigate("SettingScreen", {
-      setting: setting,
-    });
+    navigation.navigate("SettingOptionsScreen", { settingName: setting.name });
   }
 
   const section = useSelector((state) => state.settingsSlice.section);
@@ -25,10 +23,13 @@ function SettingsScreen() {
         {section.title.toUpperCase()}
       </Text>
 
-      <SettingsGroup
-        group={section}
-        onPress={settingPressHandler}
-      />
+      <View>
+        <ItemGroup
+          items={section.settings}
+          itemKeyExtractor={(setting) => setting.name}
+          onPress={settingPressHandler}
+        />
+      </View>
     </View>
   );
 }
@@ -39,8 +40,8 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   sectionHeader: {
-    marginLeft: 12,
-    fontSize: 13,
+    marginLeft: 20,
+    fontSize: 14,
     marginBottom: 8,
   },
   sectionContainer: {
@@ -50,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SettingsScreen;
+export default SettingListScreen;
