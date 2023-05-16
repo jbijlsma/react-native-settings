@@ -4,38 +4,62 @@ import { useTheme } from "../theme/useTheme";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import ItemGroup from "../components/ItemGroup";
+import { useLayoutEffect } from "react";
 
 function SettingListScreen({ route }) {
   const [theme] = useTheme();
+
+  const title = route.params?.title;
+  const backTitle = route.params?.backTitle;
+
   const navigation = useNavigation();
 
-  const topLevelSection = useSelector((state) => state.settingsSlice.section);
+  const rootSettingsPage = useSelector(
+    (state) => state.settingsSlice.rootSettingsPage
+  );
+  const page = route.params?.page ?? rootSettingsPage;
+  const pageTitle = page.title ?? title;
+
+  useLayoutEffect(() => {
+    navigation.setOptions(
+      {
+        title: pageTitle,
+        headerBackTitle: backTitle,
+      },
+      [pageTitle, backTitle]
+    );
+  }, []);
 
   function settingPressHandler(setting) {
-    console.log(setting.type);
     switch (setting.type) {
       case "SettingPageLink":
         navigation.push("SettingListScreen", {
-          section: setting.linkedSection,
+          page: setting.linkedPage,
+          title: setting.title,
+          backTitle: pageTitle,
         });
         break;
       default:
-        console.log("Default");
         navigation.navigate("SettingOptionsScreen", {
           settingName: setting.name,
+          settingTitle: setting.title,
+          backTitle: pageTitle,
         });
     }
   }
 
-  const section = route.params?.section ?? topLevelSection;
-  const headerMarginleft = 50;
-
-  return (
-    <View style={styles.container}>
+  return page.sections.map((section) => (
+    <View
+      key={section.title}
+      style={styles.container}
+    >
       <Text
         style={[
           styles.sectionHeader,
-          { color: theme.colors.sectionHeader, marginLeft: headerMarginleft },
+          {
+            color: theme.colors.sectionHeader,
+            marginLeft: section.headerMarginLeft,
+          },
         ]}
       >
         {section.title.toUpperCase()}
@@ -45,12 +69,11 @@ function SettingListScreen({ route }) {
         <ItemGroup
           items={section.settings}
           itemKeyExtractor={(setting) => setting.name}
-          marginLeft={headerMarginleft}
           onPress={settingPressHandler}
         />
       </View>
     </View>
-  );
+  ));
 }
 
 const styles = StyleSheet.create({

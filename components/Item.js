@@ -6,7 +6,6 @@ import FilledIcon from "./FilledIcon";
 function Item({
   item,
   index,
-  marginLeft,
   hasPrevSibbling,
   hasNextSibbling,
   onPress,
@@ -37,7 +36,6 @@ function Item({
     return borderRadiusStyle;
   }
 
-  const isFirstSetting = index === 0;
   const outerBoxHeight = 48;
   const pressableBorderRadius = getPressableBorderRadiusStyle(
     hasPrevSibbling,
@@ -62,28 +60,28 @@ function Item({
         },
       ]}
     >
-      <View style={styles.leadingIcon}>
-        {item.iconName && (
-          <FilledIcon
-            backgroundColor={item.iconBackgroundColor}
-            iconName={item.iconName}
-            iconColor={item.iconColor}
-            iconSize={24}
-          />
-        )}
-      </View>
-      <View
-        style={[
-          styles.innerBox,
-          { marginLeft: marginLeft },
-          !isFirstSetting &&
+      <View style={styles.innerBox}>
+        <View style={styles.innerBoxLeft}>
+          {item.iconName && (
+            <FilledIcon
+              backgroundColor={item.iconBackgroundColor}
+              iconName={item.iconName}
+              iconColor={item.iconColor}
+              iconSize={24}
+            />
+          )}
+        </View>
+        <View
+          style={[
+            styles.innerBoxRight,
             hasPrevSibbling && {
               borderTopWidth: 1,
               borderTopColor: theme.colors.settingPressedBackground,
             },
-        ]}
-      >
-        <View style={styles.settingContainer}>{children}</View>
+          ]}
+        >
+          {children}
+        </View>
       </View>
     </Pressable>
   );
@@ -100,17 +98,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   innerBox: {
+    flexDirection: "row",
     width: "100%",
     height: "100%",
   },
-  leadingIcon: {
-    position: "absolute",
-    left: 8,
+  innerBoxLeft: {
+    justifyContent: "center",
+    paddingHorizontal: 8,
   },
-  settingContainer: {
+  innerBoxRight: {
+    paddingRight: 8,
     flex: 1,
-    paddingRight: 55,
-    paddingVertical: 12,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",

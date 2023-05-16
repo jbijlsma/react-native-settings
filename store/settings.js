@@ -4,61 +4,110 @@ import { OptionsSetting } from "../models/options-setting";
 import { SettingSection } from "../models/setting-section";
 import { SettingOption } from "../models/setting-option";
 import { SettingPageLinkSetting } from "../models/setting-page-link-setting";
+import { SettingPage } from "../models/setting-page";
 
 const createCalendarSetting = (id) =>
-  new OptionsSetting("SingleSelectSetting", id, "Calendar", "g", [
-    new SettingOption("Gregorian", "g"),
-    new SettingOption("Japanese", "j"),
-    new SettingOption("Buddhist", "b"),
-  ]);
+  new OptionsSetting("SingleSelectSetting", id, "Calendar");
 
 const createMeasurementSystemSetting = (id) =>
-  new OptionsSetting("SingleSelectSetting", id, "Measurement System", "us", [
-    new SettingOption("Metric", "m"),
-    new SettingOption("US", "us"),
-    new SettingOption("UK", "uk"),
-  ]);
+  new OptionsSetting("SingleSelectSetting", id, "Measurement System");
 
-const initialState = new SettingSection("PREFERRED LANGUAGES", [
-  new SettingPageLinkSetting(
-    "SettingPageLink",
-    "general",
-    "General",
-    new SettingSection("ONE LEVEL DEEPER", [
-      createCalendarSetting("cal1"),
-      createMeasurementSystemSetting("ms1"),
-    ]),
-    "rgb(142, 142, 147)",
-    "ios-cog-outline",
-    "white"
-  ),
-  new SettingPageLinkSetting(
-    "SettingPageLink",
-    "display_and_brightness",
-    "Display and Brightness",
-    new SettingSection("ONE LEVEL DEEPER", [
-      createCalendarSetting("cal2"),
-      createMeasurementSystemSetting("ms2"),
-    ]),
-    "rgb(52, 120, 247)",
-    "ios-sunny-outline",
-    "white"
-  ),
+const initialState = new SettingPage("Settings", [
+  new SettingSection("PREFERRED LANGUAGES", 40, [
+    new SettingPageLinkSetting(
+      "SettingPageLink",
+      "general",
+      "General",
+      new SettingPage(null, [
+        new SettingSection("ONE LEVEL DEEPER", 16, [
+          createCalendarSetting("cal1"),
+          createMeasurementSystemSetting("ms1"),
+        ]),
+      ]),
+      "rgb(142, 142, 147)",
+      "ios-cog-outline",
+      "white"
+    ),
+    new SettingPageLinkSetting(
+      "SettingPageLink",
+      "display_and_brightness",
+      "Display and Brightness",
+      new SettingPage(null, [
+        new SettingSection("ONE LEVEL DEEPER", 16, [
+          createCalendarSetting("cal2"),
+          createMeasurementSystemSetting("ms2"),
+        ]),
+      ]),
+      "rgb(52, 120, 247)",
+      "ios-sunny-outline",
+      "white"
+    ),
+    new SettingPageLinkSetting(
+      "SettingPageLink",
+      "privacy_and_security",
+      "Privancy & Security",
+      new SettingPage(null, [
+        new SettingSection("ONE LEVEL DEEPER", 16, [
+          createCalendarSetting("cal3"),
+          createMeasurementSystemSetting("ms3"),
+        ]),
+      ]),
+      "rgb(87, 86, 206)",
+      "ios-hand-left-sharp",
+      "white"
+    ),
+  ]),
 ]);
 
 const settingsSlice = createSlice({
   name: "settingsSlice",
   initialState: {
-    section: initialState,
+    settingValues: {
+      cal1: "g",
+      cal2: "j",
+      cal3: "g",
+      ms1: "m",
+      ms2: "uk",
+      ms3: "uk",
+    },
+    settingOptions: {
+      cal1: [
+        new SettingOption("Gregorian", "g"),
+        new SettingOption("Japanese", "j"),
+        new SettingOption("Buddhist", "b"),
+      ],
+      cal2: [
+        new SettingOption("Gregorian", "g"),
+        new SettingOption("Japanese", "j"),
+        new SettingOption("Buddhist", "b"),
+      ],
+      cal3: [
+        new SettingOption("Gregorian", "g"),
+        new SettingOption("Japanese", "j"),
+        new SettingOption("Buddhist", "b"),
+      ],
+      ms1: [
+        new SettingOption("Metric", "m"),
+        new SettingOption("US", "us"),
+        new SettingOption("UK", "uk"),
+      ],
+      ms2: [
+        new SettingOption("Metric", "m"),
+        new SettingOption("US", "us"),
+        new SettingOption("UK", "uk"),
+      ],
+      ms3: [
+        new SettingOption("Metric", "m"),
+        new SettingOption("US", "us"),
+        new SettingOption("UK", "uk"),
+      ],
+    },
+    rootSettingsPage: initialState,
   },
   reducers: {
     updateSetting: (state, action) => {
       const { settingName, optionValue } = action.payload;
-
-      const setting = state.section.settings.find(
-        (setting) => setting.name === settingName
-      );
-      setting.value = optionValue;
+      state.settingValues[settingName] = optionValue;
     },
   },
 });

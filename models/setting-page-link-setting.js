@@ -2,7 +2,7 @@ export function SettingPageLinkSetting(
   type,
   name,
   title,
-  linkedSection,
+  linkedPage,
   iconBackgroundColor,
   iconName,
   iconColor
@@ -11,7 +11,7 @@ export function SettingPageLinkSetting(
     type: type,
     name: name,
     title: title,
-    linkedSection: linkedSection,
+    linkedPage: linkedPage,
     iconBackgroundColor: iconBackgroundColor,
     iconName: iconName,
     iconColor: iconColor,

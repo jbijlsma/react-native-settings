@@ -2,17 +2,24 @@ import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { useTheme } from "../../theme/useTheme";
+import { useSelector } from "react-redux";
 
-function SingleSelectSetting({ setting }) {
+function SingleSelectSetting({ settingName, settingTitle }) {
   const [theme] = useTheme();
+  const settingOptions = useSelector(
+    (state) => state.settingsSlice.settingOptions[settingName]
+  );
+  const settingValue = useSelector(
+    (state) => state.settingsSlice.settingValues[settingName]
+  );
 
   function capitalizeFirstLetter(word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }
 
   function getSelectedOptionTitle() {
-    var title = setting.options.find(
-      (option) => option.value === setting.value
+    var title = settingOptions.find(
+      (option) => option.value === settingValue
     ).title;
 
     return capitalizeFirstLetter(title);
@@ -28,7 +35,7 @@ function SingleSelectSetting({ setting }) {
           { color: theme.colors.sectionSettingText },
         ]}
       >
-        {setting?.title}
+        {settingTitle}
       </Text>
       <View style={styles.settingValueContainer}>
         <Text style={{ color: theme.colors.sectionSettingValue }}>

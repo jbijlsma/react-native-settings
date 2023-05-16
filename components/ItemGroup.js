@@ -5,13 +5,7 @@ import SingleSelectOptionItem from "./items/SingleSelectOptionItem";
 import UnknownItem from "./items/UnknownItem";
 import SettingPageLink from "./items/SettingPageLink";
 
-function ItemGroup({
-  items,
-  itemKeyExtractor,
-  marginLeft,
-  isOptionSelected,
-  onPress,
-}) {
+function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
   const numberOfItems = items.length;
   const lastItemIndex = items.length - 1;
 
@@ -20,7 +14,12 @@ function ItemGroup({
       case "SettingPageLink":
         return <SettingPageLink setting={item} />;
       case "SingleSelectSetting":
-        return <SingleSelectSetting setting={item} />;
+        return (
+          <SingleSelectSetting
+            settingName={item.name}
+            settingTitle={item.title}
+          />
+        );
       case "SingleSelectOptionItem":
         const isSelected = isOptionSelected(item);
         return (
@@ -46,7 +45,6 @@ function ItemGroup({
       <Item
         key={itemKeyExtractor(item)}
         item={item}
-        marginLeft={marginLeft}
         index={index}
         hasPrevSibbling={hasPrevSibbling}
         hasNextSibbling={hasNextSibbling}

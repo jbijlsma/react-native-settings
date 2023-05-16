@@ -6,13 +6,14 @@ import ItemGroup from "../components/ItemGroup";
 import { updateSetting } from "../store/settings";
 
 function SettingOptionsScreen({ navigation, route }) {
-  const { settingName } = route.params;
+  const { settingName, settingTitle, backTitle } = route.params;
 
-  const headerMarginleft = 35;
+  const settingOptions = useSelector(
+    (state) => state.settingsSlice.settingOptions[settingName]
+  );
 
-  // Pass only basic info through routeParams and look up the stats in the store to trigger changes if the state is updated
-  const setting = useSelector((state) =>
-    state.settingsSlice.section.settings.find((s) => s.name === settingName)
+  const settingValue = useSelector(
+    (state) => state.settingsSlice.settingValues[settingName]
   );
 
   const dispatch = useDispatch();
@@ -20,17 +21,17 @@ function SettingOptionsScreen({ navigation, route }) {
   useLayoutEffect(() => {
     navigation.setOptions(
       {
-        title: setting.title,
-        headerBackTitle: "Back",
+        title: settingTitle,
+        headerBackTitle: backTitle ?? "Back",
       },
-      [navigation, setting]
+      [backTitle, settingTitle]
     );
   }, []);
 
   function onPressHandler(option) {
     dispatch(
       updateSetting({
-        settingName: setting.name,
+        settingName: settingName,
         optionValue: option.value,
       })
     );
@@ -40,10 +41,9 @@ function SettingOptionsScreen({ navigation, route }) {
     <View style={styles.container}>
       <View>
         <ItemGroup
-          items={setting.options}
+          items={settingOptions}
           itemKeyExtractor={(item) => item.value}
-          isOptionSelected={(option) => option.value === setting.value}
-          marginLeft={headerMarginleft}
+          isOptionSelected={(option) => option.value === settingValue}
           onPress={onPressHandler}
         />
       </View>
