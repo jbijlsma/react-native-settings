@@ -3,13 +3,22 @@ import Item from "./Item";
 import SingleSelectSetting from "./items/SingleSelectSetting";
 import SingleSelectOptionItem from "./items/SingleSelectOptionItem";
 import UnknownItem from "./items/UnknownItem";
+import SettingPageLink from "./items/SettingPageLink";
 
-function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
+function ItemGroup({
+  items,
+  itemKeyExtractor,
+  marginLeft,
+  isOptionSelected,
+  onPress,
+}) {
   const numberOfItems = items.length;
   const lastItemIndex = items.length - 1;
 
   function createItemImplemenation(item) {
     switch (item.type) {
+      case "SettingPageLink":
+        return <SettingPageLink setting={item} />;
       case "SingleSelectSetting":
         return <SingleSelectSetting setting={item} />;
       case "SingleSelectOptionItem":
@@ -36,9 +45,8 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
     return (
       <Item
         key={itemKeyExtractor(item)}
-        title={item.title}
-        value={item.value}
-        displayValue={item.displayValue}
+        item={item}
+        marginLeft={marginLeft}
         index={index}
         hasPrevSibbling={hasPrevSibbling}
         hasNextSibbling={hasNextSibbling}

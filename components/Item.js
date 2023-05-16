@@ -1,10 +1,12 @@
-import { StyleSheet, Pressable, View } from "react-native";
+import { StyleSheet, Pressable, View, Text } from "react-native";
 
 import { useTheme } from "../theme/useTheme";
+import FilledIcon from "./FilledIcon";
 
 function Item({
   item,
   index,
+  marginLeft,
   hasPrevSibbling,
   hasNextSibbling,
   onPress,
@@ -36,7 +38,7 @@ function Item({
   }
 
   const isFirstSetting = index === 0;
-  const outerBoxHeight = 50;
+  const outerBoxHeight = 48;
   const pressableBorderRadius = getPressableBorderRadiusStyle(
     hasPrevSibbling,
     hasNextSibbling
@@ -60,9 +62,20 @@ function Item({
         },
       ]}
     >
+      <View style={styles.leadingIcon}>
+        {item.iconName && (
+          <FilledIcon
+            backgroundColor={item.iconBackgroundColor}
+            iconName={item.iconName}
+            iconColor={item.iconColor}
+            iconSize={24}
+          />
+        )}
+      </View>
       <View
         style={[
           styles.innerBox,
+          { marginLeft: marginLeft },
           !isFirstSetting &&
             hasPrevSibbling && {
               borderTopWidth: 1,
@@ -83,15 +96,20 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     overflow: "hidden",
+    flexDirection: "row",
+    alignItems: "center",
   },
   innerBox: {
-    marginLeft: 20,
     width: "100%",
     height: "100%",
   },
+  leadingIcon: {
+    position: "absolute",
+    left: 8,
+  },
   settingContainer: {
     flex: 1,
-    paddingRight: 30,
+    paddingRight: 55,
     paddingVertical: 12,
     flexDirection: "row",
     justifyContent: "space-between",

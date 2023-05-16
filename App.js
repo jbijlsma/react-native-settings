@@ -40,7 +40,7 @@ export default function App() {
     <Provider store={store}>
       <StatusBar style="auto" />
       <NavigationContainer theme={theme}>
-        <Tabs.Navigator initialRouteName="SettingsStack">
+        <Tabs.Navigator initialRouteName="Home">
           <Tabs.Screen
             name="Home"
             component={HomeScreen}

@@ -1,30 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { Setting } from "../models/setting";
+import { OptionsSetting } from "../models/options-setting";
 import { SettingSection } from "../models/setting-section";
 import { SettingOption } from "../models/setting-option";
+import { SettingPageLinkSetting } from "../models/setting-page-link-setting";
 
-const initialState = new SettingSection("PREFERRED LANGUAGES", [
-  new Setting("SingleSelectSetting", "calendar", "Calendar", "g", [
+const createCalendarSetting = (id) =>
+  new OptionsSetting("SingleSelectSetting", id, "Calendar", "g", [
     new SettingOption("Gregorian", "g"),
     new SettingOption("Japanese", "j"),
     new SettingOption("Buddhist", "b"),
-  ]),
-  new Setting("SingleSelectSetting", "ms", "Measurement System", "us", [
+  ]);
+
+const createMeasurementSystemSetting = (id) =>
+  new OptionsSetting("SingleSelectSetting", id, "Measurement System", "us", [
     new SettingOption("Metric", "m"),
     new SettingOption("US", "us"),
     new SettingOption("UK", "uk"),
-  ]),
-  new Setting("SingleSelectSetting", "ms2", "Measurement System 2", "us", [
-    new SettingOption("Metric", "m"),
-    new SettingOption("US", "us"),
-    new SettingOption("UK", "uk"),
-  ]),
-  new Setting("SingleSelectSetting", "ms3", "Measurement System 3", "us", [
-    new SettingOption("Metric", "m"),
-    new SettingOption("US", "us"),
-    new SettingOption("UK", "uk"),
-  ]),
+  ]);
+
+const initialState = new SettingSection("PREFERRED LANGUAGES", [
+  new SettingPageLinkSetting(
+    "SettingPageLink",
+    "general",
+    "General",
+    new SettingSection("ONE LEVEL DEEPER", [
+      createCalendarSetting("cal1"),
+      createMeasurementSystemSetting("ms1"),
+    ]),
+    "rgb(142, 142, 147)",
+    "ios-cog-outline",
+    "white"
+  ),
+  new SettingPageLinkSetting(
+    "SettingPageLink",
+    "display_and_brightness",
+    "Display and Brightness",
+    new SettingSection("ONE LEVEL DEEPER", [
+      createCalendarSetting("cal2"),
+      createMeasurementSystemSetting("ms2"),
+    ]),
+    "rgb(52, 120, 247)",
+    "ios-sunny-outline",
+    "white"
+  ),
 ]);
 
 const settingsSlice = createSlice({

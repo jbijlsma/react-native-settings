@@ -8,6 +8,8 @@ import { updateSetting } from "../store/settings";
 function SettingOptionsScreen({ navigation, route }) {
   const { settingName } = route.params;
 
+  const headerMarginleft = 35;
+
   // Pass only basic info through routeParams and look up the stats in the store to trigger changes if the state is updated
   const setting = useSelector((state) =>
     state.settingsSlice.section.settings.find((s) => s.name === settingName)
@@ -41,6 +43,7 @@ function SettingOptionsScreen({ navigation, route }) {
           items={setting.options}
           itemKeyExtractor={(item) => item.value}
           isOptionSelected={(option) => option.value === setting.value}
+          marginLeft={headerMarginleft}
           onPress={onPressHandler}
         />
       </View>

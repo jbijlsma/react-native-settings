@@ -5,20 +5,38 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 import ItemGroup from "../components/ItemGroup";
 
-function SettingListScreen() {
+function SettingListScreen({ route }) {
   const [theme] = useTheme();
   const navigation = useNavigation();
 
+  const topLevelSection = useSelector((state) => state.settingsSlice.section);
+
   function settingPressHandler(setting) {
-    navigation.navigate("SettingOptionsScreen", { settingName: setting.name });
+    console.log(setting.type);
+    switch (setting.type) {
+      case "SettingPageLink":
+        navigation.push("SettingListScreen", {
+          section: setting.linkedSection,
+        });
+        break;
+      default:
+        console.log("Default");
+        navigation.navigate("SettingOptionsScreen", {
+          settingName: setting.name,
+        });
+    }
   }
 
-  const section = useSelector((state) => state.settingsSlice.section);
+  const section = route.params?.section ?? topLevelSection;
+  const headerMarginleft = 50;
 
   return (
     <View style={styles.container}>
       <Text
-        style={[styles.sectionHeader, { color: theme.colors.sectionHeader }]}
+        style={[
+          styles.sectionHeader,
+          { color: theme.colors.sectionHeader, marginLeft: headerMarginleft },
+        ]}
       >
         {section.title.toUpperCase()}
       </Text>
@@ -27,6 +45,7 @@ function SettingListScreen() {
         <ItemGroup
           items={section.settings}
           itemKeyExtractor={(setting) => setting.name}
+          marginLeft={headerMarginleft}
           onPress={settingPressHandler}
         />
       </View>
@@ -43,11 +62,6 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     fontSize: 14,
     marginBottom: 8,
-  },
-  sectionContainer: {
-    borderRadius: 12,
-    marginTop: 8,
-    padding: 12,
   },
 });
 
