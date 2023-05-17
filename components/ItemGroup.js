@@ -5,13 +5,12 @@ import SingleSelectOptionItem from "./items/SingleSelectOptionItem";
 import UnknownItem from "./items/UnknownItem";
 import SettingPageLink from "./items/SettingPageLink";
 import InlineSwitchSetting from "./items/InlineSwitchSetting";
-import { View } from "react-native";
 
 function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
   const numberOfItems = items.length;
   const lastItemIndex = items.length - 1;
 
-  function createItemImplemenation(item) {
+  function createItemImplementation(item) {
     switch (item.type) {
       case "SettingInlineSwitch":
         return <InlineSwitchSetting setting={item} />;
@@ -50,13 +49,12 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
       <Item
         key={itemKeyExtractor(item)}
         item={item}
-        index={index}
         hasPrevSibbling={hasPrevSibbling}
         hasNextSibbling={hasNextSibbling}
         isPressable={item.isPressable}
         onPress={() => onPressHandler(item)}
       >
-        {createItemImplemenation(item)}
+        {createItemImplementation(item)}
       </Item>
     );
   });

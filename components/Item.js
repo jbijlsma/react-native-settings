@@ -5,7 +5,6 @@ import FilledIcon from "./FilledIcon";
 
 function Item({
   item,
-  index,
   hasPrevSibbling,
   hasNextSibbling,
   isPressable,
