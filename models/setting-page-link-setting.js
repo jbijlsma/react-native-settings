@@ -8,6 +8,7 @@ export function SettingPageLinkSetting(
   iconColor
 ) {
   return {
+    isPressable: true,
     type: type,
     name: name,
     title: title,

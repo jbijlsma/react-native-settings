@@ -5,6 +5,7 @@ import { SettingSection } from "../models/setting-section";
 import { SettingOption } from "../models/setting-option";
 import { SettingPageLinkSetting } from "../models/setting-page-link-setting";
 import { SettingPage } from "../models/setting-page";
+import { SettingInlineSwitch } from "../models/setting-inline-switch";
 
 const createCalendarSetting = (id) =>
   new OptionsSetting("SingleSelectSetting", id, "Calendar");
@@ -13,7 +14,32 @@ const createMeasurementSystemSetting = (id) =>
   new OptionsSetting("SingleSelectSetting", id, "Measurement System");
 
 const initialState = new SettingPage("Settings", [
-  new SettingSection("PREFERRED LANGUAGES", 40, [
+  new SettingSection(null, 40, [
+    new SettingInlineSwitch(
+      "airplane_mode",
+      "Airplane Mode",
+      "rgb(241,154,56)",
+      "ios-airplane",
+      "white"
+    ),
+  ]),
+  new SettingSection(null, 40, [
+    new SettingPageLinkSetting(
+      "SettingPageLink",
+      "general",
+      "General",
+      new SettingPage(null, [
+        new SettingSection("ONE LEVEL DEEPER", 16, [
+          createCalendarSetting("cal1"),
+          createMeasurementSystemSetting("ms1"),
+        ]),
+      ]),
+      "rgb(142, 142, 147)",
+      "ios-cog-outline",
+      "white"
+    ),
+  ]),
+  new SettingSection(null, 40, [
     new SettingPageLinkSetting(
       "SettingPageLink",
       "general",
@@ -45,7 +71,7 @@ const initialState = new SettingPage("Settings", [
     new SettingPageLinkSetting(
       "SettingPageLink",
       "privacy_and_security",
-      "Privancy & Security",
+      "Privacy & Security",
       new SettingPage(null, [
         new SettingSection("ONE LEVEL DEEPER", 16, [
           createCalendarSetting("cal3"),
@@ -63,6 +89,7 @@ const settingsSlice = createSlice({
   name: "settingsSlice",
   initialState: {
     settingValues: {
+      airplane_mode: false,
       cal1: "g",
       cal2: "j",
       cal3: "g",

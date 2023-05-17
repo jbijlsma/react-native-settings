@@ -48,11 +48,8 @@ function SettingListScreen({ route }) {
     }
   }
 
-  return page.sections.map((section) => (
-    <View
-      key={section.title}
-      style={styles.container}
-    >
+  const sections = page.sections.map((section) => {
+    const header = section.title ? (
       <Text
         style={[
           styles.sectionHeader,
@@ -64,22 +61,32 @@ function SettingListScreen({ route }) {
       >
         {section.title.toUpperCase()}
       </Text>
+    ) : null;
 
-      <View>
-        <ItemGroup
-          items={section.settings}
-          itemKeyExtractor={(setting) => setting.name}
-          onPress={settingPressHandler}
-        />
+    return (
+      <View key={section.id}>
+        <View class={styles.sectionHeader}>{header}</View>
+        <View style={styles.section}>
+          <ItemGroup
+            items={section.settings}
+            itemKeyExtractor={(setting) => setting.name}
+            onPress={settingPressHandler}
+          />
+        </View>
       </View>
-    </View>
-  ));
+    );
+  });
+
+  return <View style={styles.pageContainer}>{sections}</View>;
 }
 
 const styles = StyleSheet.create({
-  container: {
+  pageContainer: {
     flex: 1,
     padding: 16,
+  },
+  section: {
+    marginBottom: 16,
   },
   sectionHeader: {
     marginLeft: 20,

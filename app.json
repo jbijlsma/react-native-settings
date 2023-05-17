@@ -3,9 +3,9 @@
     "name": "settings",
     "slug": "settings",
     "version": "1.0.0",
-    "orientation": "auto",
+    "orientation": "default",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "auto",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",

@@ -4,6 +4,8 @@ import SingleSelectSetting from "./items/SingleSelectSetting";
 import SingleSelectOptionItem from "./items/SingleSelectOptionItem";
 import UnknownItem from "./items/UnknownItem";
 import SettingPageLink from "./items/SettingPageLink";
+import InlineSwitchSetting from "./items/InlineSwitchSetting";
+import { View } from "react-native";
 
 function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
   const numberOfItems = items.length;
@@ -11,6 +13,8 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
 
   function createItemImplemenation(item) {
     switch (item.type) {
+      case "SettingInlineSwitch":
+        return <InlineSwitchSetting setting={item} />;
       case "SettingPageLink":
         return <SettingPageLink setting={item} />;
       case "SingleSelectSetting":
@@ -29,6 +33,7 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
           />
         );
       default:
+        console.log("default");
         return <UnknownItem item={item} />;
     }
   }
@@ -48,6 +53,7 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
         index={index}
         hasPrevSibbling={hasPrevSibbling}
         hasNextSibbling={hasNextSibbling}
+        isPressable={item.isPressable}
         onPress={() => onPressHandler(item)}
       >
         {createItemImplemenation(item)}

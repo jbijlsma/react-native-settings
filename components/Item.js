@@ -8,6 +8,7 @@ function Item({
   index,
   hasPrevSibbling,
   hasNextSibbling,
+  isPressable,
   onPress,
   children,
 }) {
@@ -43,21 +44,27 @@ function Item({
   );
   const top = index * outerBoxHeight - index;
 
+  function onPressHandler() {
+    if (item.isPressable) {
+      onPress(item);
+    }
+  }
+
   return (
     <Pressable
-      onPress={onPress.bind(this, item)}
+      onPress={onPressHandler}
       style={({ pressed }) => [
         styles.outerBox,
+        hasPrevSibbling && { marginTop: -1 },
         pressableBorderRadius,
         {
-          top: top,
-          height: outerBoxHeight,
           backgroundColor: theme.colors.sectionBackground,
         },
-        pressed && {
-          backgroundColor: theme.colors.settingPressedBackground,
-          zIndex: 1000,
-        },
+        isPressable &&
+          pressed && {
+            backgroundColor: theme.colors.settingPressedBackground,
+            zIndex: 100,
+          },
       ]}
     >
       <View style={styles.innerBox}>
@@ -89,26 +96,22 @@ function Item({
 
 const styles = StyleSheet.create({
   outerBox: {
-    position: "absolute",
     width: "100%",
-    left: 0,
-    right: 0,
-    overflow: "hidden",
     flexDirection: "row",
-    alignItems: "center",
   },
   innerBox: {
     flexDirection: "row",
-    width: "100%",
-    height: "100%",
+    flex: 1,
+    alignItems: "center",
   },
   innerBoxLeft: {
     justifyContent: "center",
     paddingHorizontal: 8,
   },
   innerBoxRight: {
-    paddingRight: 8,
     flex: 1,
+    paddingRight: 4,
+    paddingVertical: 8,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
