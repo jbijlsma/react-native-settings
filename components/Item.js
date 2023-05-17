@@ -68,14 +68,7 @@ function Item({
     >
       <View style={styles.innerBox}>
         <View style={styles.innerBoxLeft}>
-          {item.iconName && (
-            <FilledIcon
-              backgroundColor={item.iconBackgroundColor}
-              iconName={item.iconName}
-              iconColor={item.iconColor}
-              iconSize={24}
-            />
-          )}
+          {item.icon && <FilledIcon icon={{ ...item.icon, size: 24 }} />}
           {itemLeftContent}
         </View>
         <View

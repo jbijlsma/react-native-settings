@@ -1,20 +1,10 @@
-export function SettingPageLinkSetting(
-  type,
-  name,
-  title,
-  linkedPage,
-  iconBackgroundColor,
-  iconName,
-  iconColor
-) {
+export function SettingPageLinkSetting(type, name, title, linkedPage, icon) {
   return {
     isPressable: true,
     type: type,
     name: name,
     title: title,
     linkedPage: linkedPage,
-    iconBackgroundColor: iconBackgroundColor,
-    iconName: iconName,
-    iconColor: iconColor,
+    icon,
   };
 }

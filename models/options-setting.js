@@ -1,8 +1,9 @@
-export function OptionsSetting(type, name, title) {
+export function OptionsSetting(name, title, icon) {
   return {
+    type: "SingleSelectSetting",
     isPressable: true,
-    type: type,
     name: name,
     title: title,
+    icon: icon,
   };
 }

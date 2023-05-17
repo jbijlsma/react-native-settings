@@ -12,30 +12,26 @@ import { SettingLogin } from "../models/setting-login";
 import DarkTheme from "../theme/DarkTheme";
 import LightTheme from "../theme/LightTheme";
 
-const createCalendarSetting = (id) =>
-  new OptionsSetting("SingleSelectSetting", id, "Calendar");
+const createCalendarSetting = (id) => new OptionsSetting(id, "Calendar");
 
 const createMeasurementSystemSetting = (id) =>
-  new OptionsSetting("SingleSelectSetting", id, "Measurement System");
+  new OptionsSetting(id, "Measurement System");
 
 const initialState = new SettingPage("Settings", [
   new SettingSection(null, 40, [new SettingLogin("login")]),
   new SettingSection(null, 40, [
-    new OptionsSetting("SingleSelectSetting", "display_mode", "Display Mode"),
-    new SettingInlineSwitch(
-      "dark_mode",
-      "Dark Mode",
-      "rgb(52, 120, 247)",
-      "ios-moon",
-      "white"
-    ),
-    new SettingInlineSwitch(
-      "airplane_mode",
-      "Airplane Mode",
-      "rgb(241,154,56)",
-      "ios-airplane",
-      "white"
-    ),
+    new OptionsSetting("display_mode", "Display Mode", {
+      name: "ios-moon",
+      color: "white",
+      backgroundColor: "rgb(52, 120, 247)",
+    }),
+  ]),
+  new SettingSection(null, 40, [
+    new SettingInlineSwitch("airplane_mode", "Airplane Mode", {
+      name: "ios-airplane",
+      color: "white",
+      backgroundColor: "rgb(241,154,56)",
+    }),
   ]),
   new SettingSection(null, 40, [
     new SettingPageLinkSetting(
@@ -48,9 +44,11 @@ const initialState = new SettingPage("Settings", [
           createMeasurementSystemSetting("ms1"),
         ]),
       ]),
-      "rgb(142, 142, 147)",
-      "ios-cog-outline",
-      "white"
+      {
+        name: "ios-cog-outline",
+        color: "white",
+        backgroundColor: "rgb(142, 142, 147)",
+      }
     ),
     new SettingPageLinkSetting(
       "SettingPageLink",
@@ -62,9 +60,11 @@ const initialState = new SettingPage("Settings", [
           createMeasurementSystemSetting("ms2"),
         ]),
       ]),
-      "rgb(52, 120, 247)",
-      "ios-sunny-outline",
-      "white"
+      {
+        name: "ios-sunny-outline",
+        color: "white",
+        backgroundColor: "rgb(52, 120, 247)",
+      }
     ),
     new SettingPageLinkSetting(
       "SettingPageLink",
@@ -76,9 +76,11 @@ const initialState = new SettingPage("Settings", [
           createMeasurementSystemSetting("ms3"),
         ]),
       ]),
-      "rgb(87, 86, 206)",
-      "ios-hand-left-sharp",
-      "white"
+      {
+        name: "ios-hand-left-sharp",
+        color: "white",
+        backgroundColor: "rgb(87, 86, 206)",
+      }
     ),
   ]),
 ]);
