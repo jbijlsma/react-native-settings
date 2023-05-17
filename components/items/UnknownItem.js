@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 
 function UnknownItem(item) {
   return <Text style={styles.text}>{item.title}</Text>;

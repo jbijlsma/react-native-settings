@@ -1,7 +1,8 @@
-import { StyleSheet, Pressable, View, Text } from "react-native";
+import { StyleSheet, Pressable, View } from "react-native";
 
-import { useTheme } from "../theme/useTheme";
 import FilledIcon from "./FilledIcon";
+import { useSelector } from "react-redux";
+import { getTheme } from "../store/settings";
 
 function Item({
   item,
@@ -12,7 +13,7 @@ function Item({
   itemLeftContent,
   itemRightContent,
 }) {
-  const [theme] = useTheme();
+  const theme = useSelector(getTheme);
 
   function getPressableBorderRadiusStyle(hasPrevSibbling, hasNextSibbling) {
     const borderRadius = 12;

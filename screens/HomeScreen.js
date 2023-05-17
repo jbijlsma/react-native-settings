@@ -1,10 +1,6 @@
 import { StyleSheet, View } from "react-native";
 
-import { useTheme } from "../theme/useTheme";
-
 function HomeScreen({ navigation }) {
-  const [theme] = useTheme();
-
   return (
     <View style={styles.pageContainer}>
       <View style={styles.outerContainer}></View>

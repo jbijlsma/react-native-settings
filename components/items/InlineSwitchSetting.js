@@ -1,11 +1,11 @@
 import { StyleSheet, Switch, Text, View } from "react-native";
 
-import { useTheme } from "../../theme/useTheme";
 import { useDispatch, useSelector } from "react-redux";
-import { updateSetting } from "../../store/settings";
+import { getTheme, updateSetting } from "../../store/settings";
 
 function InlineSwitchSetting({ setting }) {
-  const [theme] = useTheme();
+  const theme = useSelector(getTheme);
+
   const settingValue = useSelector(
     (state) => state.settingsSlice.settingValues[setting.name]
   );

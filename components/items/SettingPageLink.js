@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
 
-import { useTheme } from "../../theme/useTheme";
+import { getTheme } from "../../store/settings";
 
 function SettingPageLink({ setting }) {
-  const [theme] = useTheme();
+  const theme = useSelector(getTheme);
 
   return (
     <>

@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import { useTheme } from "../theme/useTheme";
-
+import { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+
 import ItemGroup from "../components/ItemGroup";
-import { useLayoutEffect } from "react";
+import { getTheme } from "../store/settings";
 
 function SettingListScreen({ route }) {
-  const [theme] = useTheme();
+  const theme = useSelector(getTheme);
 
   const title = route.params?.title;
   const backTitle = route.params?.backTitle;

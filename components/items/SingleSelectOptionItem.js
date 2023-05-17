@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
-import { useTheme } from "../../theme/useTheme";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../store/settings";
 
 function SingleSelectOptionItem({ setting, isSelected }) {
-  const [theme] = useTheme();
+  const theme = useSelector(getTheme);
 
   return (
     <>

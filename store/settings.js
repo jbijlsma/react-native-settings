@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { Appearance } from "react-native";
 
 import { OptionsSetting } from "../models/options-setting";
 import { SettingSection } from "../models/setting-section";
@@ -7,6 +8,9 @@ import { SettingPageLinkSetting } from "../models/setting-page-link-setting";
 import { SettingPage } from "../models/setting-page";
 import { SettingInlineSwitch } from "../models/setting-inline-switch";
 import { SettingLogin } from "../models/setting-login";
+
+import DarkTheme from "../theme/DarkTheme";
+import LightTheme from "../theme/LightTheme";
 
 const createCalendarSetting = (id) =>
   new OptionsSetting("SingleSelectSetting", id, "Calendar");
@@ -17,6 +21,7 @@ const createMeasurementSystemSetting = (id) =>
 const initialState = new SettingPage("Settings", [
   new SettingSection(null, 40, [new SettingLogin("login")]),
   new SettingSection(null, 40, [
+    new OptionsSetting("SingleSelectSetting", "display_mode", "Display Mode"),
     new SettingInlineSwitch(
       "dark_mode",
       "Dark Mode",
@@ -82,6 +87,8 @@ const settingsSlice = createSlice({
   name: "settingsSlice",
   initialState: {
     settingValues: {
+      // device_color_scheme: "dark",
+      display_mode: "auto",
       dark_mode: true,
       airplane_mode: false,
       cal1: "g",
@@ -92,6 +99,11 @@ const settingsSlice = createSlice({
       ms3: "uk",
     },
     settingOptions: {
+      display_mode: [
+        new SettingOption("Automatic", "auto"),
+        new SettingOption("Dark", "dark"),
+        new SettingOption("Light", "light"),
+      ],
       cal1: [
         new SettingOption("Gregorian", "g"),
         new SettingOption("Japanese", "j"),
@@ -132,6 +144,22 @@ const settingsSlice = createSlice({
     },
   },
 });
+
+export const getTheme = createSelector(
+  (state) => state.settingsSlice.settingValues["display_mode"],
+  (state) => state.settingsSlice.settingValues["device_color_scheme"],
+  (displayMode, deviceColorScheme) => {
+    switch (displayMode) {
+      case "dark":
+        return DarkTheme;
+      case "light":
+        return LightTheme;
+      default:
+        const colorScheme = deviceColorScheme ?? Appearance.getColorScheme();
+        return colorScheme === "dark" ? DarkTheme : LightTheme;
+    }
+  }
+);
 
 export const { updateSetting } = settingsSlice.actions;
 
