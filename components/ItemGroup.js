@@ -5,35 +5,42 @@ import SingleSelectOptionItem from "./items/SingleSelectOptionItem";
 import UnknownItem from "./items/UnknownItem";
 import SettingPageLink from "./items/SettingPageLink";
 import InlineSwitchSetting from "./items/InlineSwitchSetting";
+import LoginSetting from "./items/LoginSetting";
 
 function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
   const numberOfItems = items.length;
   const lastItemIndex = items.length - 1;
 
-  function createItemImplementation(item) {
+  function createItemContent(item) {
     switch (item.type) {
+      case "SettingLogin":
+        return LoginSetting();
       case "SettingInlineSwitch":
-        return <InlineSwitchSetting setting={item} />;
+        return { right: <InlineSwitchSetting setting={item} /> };
       case "SettingPageLink":
-        return <SettingPageLink setting={item} />;
+        return { right: <SettingPageLink setting={item} /> };
       case "SingleSelectSetting":
-        return (
-          <SingleSelectSetting
-            settingName={item.name}
-            settingTitle={item.title}
-          />
-        );
+        return {
+          right: (
+            <SingleSelectSetting
+              settingName={item.name}
+              settingTitle={item.title}
+            />
+          ),
+        };
       case "SingleSelectOptionItem":
         const isSelected = isOptionSelected(item);
-        return (
-          <SingleSelectOptionItem
-            setting={item}
-            isSelected={isSelected}
-          />
-        );
+        return {
+          right: (
+            <SingleSelectOptionItem
+              setting={item}
+              isSelected={isSelected}
+            />
+          ),
+        };
       default:
         console.log("default");
-        return <UnknownItem item={item} />;
+        return { right: <UnknownItem item={item} /> };
     }
   }
 
@@ -45,6 +52,8 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
     const hasPrevSibbling = numberOfItems > 0 && index > 0;
     const hasNextSibbling = numberOfItems > 0 && index < lastItemIndex;
 
+    const itemContent = createItemContent(item);
+
     return (
       <Item
         key={itemKeyExtractor(item)}
@@ -53,9 +62,9 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
         hasNextSibbling={hasNextSibbling}
         isPressable={item.isPressable}
         onPress={() => onPressHandler(item)}
-      >
-        {createItemImplementation(item)}
-      </Item>
+        itemLeftContent={itemContent.left}
+        itemRightContent={itemContent.right}
+      ></Item>
     );
   });
 }

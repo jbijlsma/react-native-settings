@@ -6,6 +6,7 @@ import { SettingOption } from "../models/setting-option";
 import { SettingPageLinkSetting } from "../models/setting-page-link-setting";
 import { SettingPage } from "../models/setting-page";
 import { SettingInlineSwitch } from "../models/setting-inline-switch";
+import { SettingLogin } from "../models/setting-login";
 
 const createCalendarSetting = (id) =>
   new OptionsSetting("SingleSelectSetting", id, "Calendar");
@@ -14,7 +15,15 @@ const createMeasurementSystemSetting = (id) =>
   new OptionsSetting("SingleSelectSetting", id, "Measurement System");
 
 const initialState = new SettingPage("Settings", [
+  new SettingSection(null, 40, [new SettingLogin("login")]),
   new SettingSection(null, 40, [
+    new SettingInlineSwitch(
+      "dark_mode",
+      "Dark Mode",
+      "rgb(52, 120, 247)",
+      "ios-moon",
+      "white"
+    ),
     new SettingInlineSwitch(
       "airplane_mode",
       "Airplane Mode",
@@ -73,6 +82,7 @@ const settingsSlice = createSlice({
   name: "settingsSlice",
   initialState: {
     settingValues: {
+      dark_mode: true,
       airplane_mode: false,
       cal1: "g",
       cal2: "j",

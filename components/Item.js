@@ -9,7 +9,8 @@ function Item({
   hasNextSibbling,
   isPressable,
   onPress,
-  children,
+  itemLeftContent,
+  itemRightContent,
 }) {
   const [theme] = useTheme();
 
@@ -74,6 +75,7 @@ function Item({
               iconSize={24}
             />
           )}
+          {itemLeftContent}
         </View>
         <View
           style={[
@@ -84,7 +86,7 @@ function Item({
             },
           ]}
         >
-          {children}
+          {itemRightContent}
         </View>
       </View>
     </Pressable>
