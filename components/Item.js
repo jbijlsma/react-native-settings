@@ -37,12 +37,10 @@ function Item({
     return borderRadiusStyle;
   }
 
-  const outerBoxHeight = 48;
   const pressableBorderRadius = getPressableBorderRadiusStyle(
     hasPrevSibbling,
     hasNextSibbling
   );
-  const top = index * outerBoxHeight - index;
 
   function onPressHandler() {
     if (item.isPressable) {

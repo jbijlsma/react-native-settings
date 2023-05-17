@@ -38,22 +38,6 @@ const initialState = new SettingPage("Settings", [
       "ios-cog-outline",
       "white"
     ),
-  ]),
-  new SettingSection(null, 40, [
-    new SettingPageLinkSetting(
-      "SettingPageLink",
-      "general",
-      "General",
-      new SettingPage(null, [
-        new SettingSection("ONE LEVEL DEEPER", 16, [
-          createCalendarSetting("cal1"),
-          createMeasurementSystemSetting("ms1"),
-        ]),
-      ]),
-      "rgb(142, 142, 147)",
-      "ios-cog-outline",
-      "white"
-    ),
     new SettingPageLinkSetting(
       "SettingPageLink",
       "display_and_brightness",
