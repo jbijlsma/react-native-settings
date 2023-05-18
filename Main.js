@@ -12,6 +12,8 @@ import SettingOptionsScreen from "./screens/SettingOptionsScreen";
 import { useDispatch, useSelector } from "react-redux";
 import { getTheme } from "./store/settings";
 import { updateSetting } from "./store/settings";
+import AppleSigninScreen from "./screens/login/AppleSigninScreen";
+import ModalsScreen from "./screens/ModalsScreen";
 
 function Main() {
   const Tabs = createBottomTabNavigator();
@@ -36,16 +38,48 @@ function Main() {
   function SettingsStack() {
     return (
       <Stack.Navigator initialRouteName="SettingListScreen">
+        <Stack.Group>
+          <Stack.Screen
+            name="SettingListScreen"
+            component={SettingListScreen}
+            options={{
+              title: "Settings",
+            }}
+          />
+          <Stack.Screen
+            name="SettingOptionsScreen"
+            component={SettingOptionsScreen}
+          />
+        </Stack.Group>
+        <Stack.Group>
+          <Stack.Screen
+            name="AppleSigninScreen"
+            component={AppleSigninScreen}
+            options={{
+              title: "Apple ID",
+            }}
+          />
+        </Stack.Group>
+      </Stack.Navigator>
+    );
+  }
+
+  function ModalsStack() {
+    return (
+      <Stack.Navigator>
         <Stack.Screen
-          name="SettingListScreen"
-          component={SettingListScreen}
+          name="ModalsScreen"
+          component={ModalsScreen}
           options={{
-            title: "Settings",
+            title: "Modals",
           }}
         />
         <Stack.Screen
-          name="SettingOptionsScreen"
-          component={SettingOptionsScreen}
+          name="AppleSigninScreen"
+          component={AppleSigninScreen}
+          options={{
+            title: "Apple ID",
+          }}
         />
       </Stack.Navigator>
     );
@@ -55,15 +89,30 @@ function Main() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer theme={theme}>
-        <Tabs.Navigator initialRouteName="SettingsStack">
+        <Tabs.Navigator initialRouteName="ModalsStack">
           <Tabs.Screen
             name="Home"
             component={HomeScreen}
             options={{
-              headerShown: false,
+              headerShown: true,
               tabBarIcon: ({ color, size }) => (
                 <Ionicons
                   name="home-outline"
+                  size={size}
+                  color={color}
+                />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="ModalsStack"
+            component={ModalsStack}
+            options={{
+              headerShown: false,
+              title: "Modals",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons
+                  name="ios-copy"
                   size={size}
                   color={color}
                 />

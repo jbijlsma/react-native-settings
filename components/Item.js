@@ -10,8 +10,7 @@ function Item({
   hasNextSibbling,
   isPressable,
   onPress,
-  itemLeftContent,
-  itemRightContent,
+  itemContent,
 }) {
   const theme = useSelector(getTheme);
 
@@ -69,7 +68,7 @@ function Item({
       <View style={styles.innerBox}>
         <View style={styles.innerBoxLeft}>
           {item.icon && <FilledIcon icon={{ ...item.icon, size: 24 }} />}
-          {itemLeftContent}
+          {itemContent?.left}
         </View>
         <View
           style={[
@@ -80,7 +79,7 @@ function Item({
             },
           ]}
         >
-          {itemRightContent}
+          {itemContent.right}
         </View>
       </View>
     </Pressable>
@@ -108,6 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    minHeight: 50,
   },
 });
 

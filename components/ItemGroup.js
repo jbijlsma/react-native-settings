@@ -44,8 +44,8 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
     }
   }
 
-  function onPressHandler(item) {
-    onPress(item);
+  function onPressHandler(item, itemContent) {
+    onPress(item, itemContent);
   }
 
   return items.map((item, index) => {
@@ -61,9 +61,8 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
         hasPrevSibbling={hasPrevSibbling}
         hasNextSibbling={hasNextSibbling}
         isPressable={item.isPressable}
-        onPress={() => onPressHandler(item)}
-        itemLeftContent={itemContent.left}
-        itemRightContent={itemContent.right}
+        onPress={() => onPressHandler(item, itemContent)}
+        itemContent={itemContent}
       ></Item>
     );
   });

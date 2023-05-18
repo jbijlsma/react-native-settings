@@ -3,13 +3,18 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 import { getTheme } from "../../store/settings";
+import { useNavigation } from "@react-navigation/native";
 
 function LoginSetting() {
   const theme = useSelector(getTheme);
+  const navigation = useNavigation();
 
   return {
+    onClick: () => {
+      navigation.navigate("AppleSigninScreen");
+    },
     left: (
-      <View style={styles.container}>
+      <View style={styles.leftContainer}>
         <Ionicons
           name="ios-person"
           color="black"
@@ -18,20 +23,27 @@ function LoginSetting() {
       </View>
     ),
     right: (
-      <View>
-        <Text style={[styles.title, { color: theme.colors.primary }]}>
-          Sign in to your iPhone
-        </Text>
-        <Text style={[styles.subTitle, { color: theme.colors.text }]}>
-          Set up iCloud, the App Store, and more.
-        </Text>
+      <View style={styles.rightContainer}>
+        <View>
+          <Text style={[styles.title, { color: theme.colors.primary }]}>
+            Sign in to your iPhone
+          </Text>
+          <Text style={[styles.subTitle, { color: theme.colors.text }]}>
+            Set up iCloud, the App Store, and more.
+          </Text>
+        </View>
+        <Ionicons
+          name="chevron-forward-outline"
+          color={theme.colors.sectionSettingValue}
+          size={22}
+        />
       </View>
     ),
   };
 }
 
 const styles = StyleSheet.create({
-  container: {
+  leftContainer: {
     borderRadius: 30,
     width: 60,
     height: 60,
@@ -40,6 +52,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     overflow: "hidden",
     margin: 6,
+  },
+  rightContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   title: {
     fontSize: 18,
