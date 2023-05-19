@@ -12,6 +12,7 @@ import { SettingLogin } from "../models/setting-login";
 
 import DarkTheme from "../theme/DarkTheme";
 import LightTheme from "../theme/LightTheme";
+import { SettingResetSettings } from "../models/setting-reset-settings";
 
 const createCalendarSetting = (id) => new OptionsSetting(id, "Calendar");
 
@@ -84,6 +85,7 @@ const initialState = new SettingPage("Settings", [
       }
     ),
   ]),
+  new SettingSection(null, 40, [new SettingResetSettings("reset_settings")]),
 ]);
 
 const defaultSettingValues = {
@@ -146,6 +148,9 @@ const settingsSlice = createSlice({
       const { settingName, optionValue } = action.payload;
       state.settingValues[settingName] = optionValue;
     },
+    purgeSettings: (state, action) => {
+      state.settingValues = defaultSettingValues;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(PURGE, (state) => {
@@ -170,6 +175,6 @@ export const getTheme = createSelector(
   }
 );
 
-export const { updateSetting } = settingsSlice.actions;
+export const { updateSetting, purgeSettings } = settingsSlice.actions;
 
 export default settingsSlice.reducer;

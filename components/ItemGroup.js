@@ -6,6 +6,7 @@ import UnknownItem from "./items/UnknownItem";
 import SettingPageLink from "./items/SettingPageLink";
 import InlineSwitchSetting from "./items/InlineSwitchSetting";
 import LoginSetting from "./items/LoginSetting";
+import ResetSettingsToDefaultsSetting from "./items/ResetSettingsToDefaultsSetting";
 
 function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
   const numberOfItems = items.length;
@@ -15,6 +16,8 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
     switch (item.type) {
       case "SettingLogin":
         return LoginSetting();
+      case "SettingResetSettingDefaults":
+        return ResetSettingsToDefaultsSetting();
       case "SettingInlineSwitch":
         return { right: <InlineSwitchSetting setting={item} /> };
       case "SettingPageLink":

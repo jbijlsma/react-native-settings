@@ -33,7 +33,6 @@ function SettingListScreen({ route }) {
   function settingPressHandler(setting, itemContent) {
     switch (setting.type) {
       case "SettingLogin":
-        // console.log(itemContent);
         itemContent.onClick();
         break;
       case "SettingPageLink":

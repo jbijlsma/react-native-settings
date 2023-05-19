@@ -50,14 +50,6 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: "center",
   },
-  // iconContainer: {
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  //   width: 200,
-  //   height: 200,
-  //   borderRadius: 100,
-  //   overflow: "hidden",
-  // },
   pressed: {
     opacity: 0.5,
   },

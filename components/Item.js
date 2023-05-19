@@ -48,6 +48,30 @@ function Item({
     }
   }
 
+  let innerBoxContent = (
+    <>
+      <View style={styles.innerBoxLeft}>
+        {item.icon && <FilledIcon icon={{ ...item.icon, size: 24 }} />}
+        {itemContent?.left}
+      </View>
+      <View
+        style={[
+          styles.innerBoxRight,
+          hasPrevSibbling && {
+            borderTopWidth: 1,
+            borderTopColor: theme.colors.settingPressedBackground,
+          },
+        ]}
+      >
+        {itemContent.right}
+      </View>
+    </>
+  );
+
+  if (itemContent.content) {
+    innerBoxContent = itemContent.content;
+  }
+
   return (
     <Pressable
       onPress={onPressHandler}
@@ -65,23 +89,7 @@ function Item({
           },
       ]}
     >
-      <View style={styles.innerBox}>
-        <View style={styles.innerBoxLeft}>
-          {item.icon && <FilledIcon icon={{ ...item.icon, size: 24 }} />}
-          {itemContent?.left}
-        </View>
-        <View
-          style={[
-            styles.innerBoxRight,
-            hasPrevSibbling && {
-              borderTopWidth: 1,
-              borderTopColor: theme.colors.settingPressedBackground,
-            },
-          ]}
-        >
-          {itemContent.right}
-        </View>
-      </View>
+      <View style={styles.innerBox}>{innerBoxContent}</View>
     </Pressable>
   );
 }
