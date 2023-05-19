@@ -4,9 +4,11 @@ const authSlice = createSlice({
   name: "authSlice",
   initialState: {
     user: {
-      isAuthenticated: false,
-      fullName: "",
-      email: "",
+      isAuthenticated: true,
+      fullName: "John Doe",
+      email: "john@doe.com",
+      avatarUri:
+        "https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256",
     },
   },
   reducers: {
@@ -15,6 +17,8 @@ const authSlice = createSlice({
         isAuthenticated: true,
         fullName: "John Doe",
         email: "john@doe.com",
+        avatarUri:
+          "https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256",
       };
     },
     logout(state) {

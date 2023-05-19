@@ -108,7 +108,7 @@ function Main() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer theme={theme}>
-        <Tabs.Navigator initialRouteName="ModalsStack">
+        <Tabs.Navigator initialRouteName="SettingsStack">
           <Tabs.Screen
             name="Home"
             component={HomeScreen}

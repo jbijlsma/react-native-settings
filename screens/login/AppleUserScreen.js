@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getTheme } from "../../store/settings";
 import { logout } from "../../store/auth";
+import Avatar from "../../components/Avatar";
 
 function AppleUserScreen({ navigation, onSignoutSuccess }) {
   const theme = useSelector(getTheme);
@@ -18,33 +19,11 @@ function AppleUserScreen({ navigation, onSignoutSuccess }) {
 
   return (
     <View style={styles.pageContainer}>
-      <View
-        style={[
-          styles.iconContainer,
-          { backgroundColor: theme.colors.settingPressedBackground },
-        ]}
-      >
-        <Ionicons
-          name="ios-person"
-          color="black"
-          size={207}
-        ></Ionicons>
-        <Pressable
-          style={({ pressed }) => [
-            styles.editIconBtn,
-            pressed && styles.pressed,
-          ]}
-        >
-          <Text
-            style={[
-              styles.editIconBtnText,
-              { color: theme.colors.sectionSettingValue },
-            ]}
-          >
-            EDIT
-          </Text>
-        </Pressable>
-      </View>
+      <Avatar
+        size={150}
+        imageUri={user.avatarUri}
+      />
+
       <Text style={[styles.userName, { color: theme.colors.text }]}>
         {user.fullName}
       </Text>
@@ -71,19 +50,14 @@ const styles = StyleSheet.create({
     padding: 16,
     alignItems: "center",
   },
-  iconContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    overflow: "hidden",
-  },
-  editIconBtn: {
-    position: "absolute",
-    bottom: 24,
-    margin: 8,
-  },
+  // iconContainer: {
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  //   width: 200,
+  //   height: 200,
+  //   borderRadius: 100,
+  //   overflow: "hidden",
+  // },
   pressed: {
     opacity: 0.5,
   },

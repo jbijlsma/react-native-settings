@@ -1,15 +1,67 @@
-import { useEffect, useRef } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 import { getTheme } from "../../store/settings";
 import { useNavigation } from "@react-navigation/native";
+import Avatar from "../Avatar";
 
 function LoginSetting() {
   const theme = useSelector(getTheme);
   const user = useSelector((state) => state.authSlice.user);
   const navigation = useNavigation();
+
+  function createLeftContent() {
+    return (
+      <View style={styles.leftContainer}>
+        {user.isAuthenticated ? (
+          <Avatar
+            size={64}
+            imageUri={user.avatarUri}
+          />
+        ) : (
+          <Ionicons
+            name="ios-person"
+            color="black"
+            size={62}
+          ></Ionicons>
+        )}
+      </View>
+    );
+  }
+
+  function createRightContent() {
+    const content = user.isAuthenticated ? (
+      <View>
+        <Text style={[styles.title, { color: theme.colors.primary }]}>
+          {user.fullName}
+        </Text>
+        <Text style={[styles.subTitle, { color: theme.colors.text }]}>
+          Apple ID, iCloud+, Media & Purchases
+        </Text>
+      </View>
+    ) : (
+      <View>
+        <Text style={[styles.title, { color: theme.colors.primary }]}>
+          Sign in to your iPhone
+        </Text>
+        <Text style={[styles.subTitle, { color: theme.colors.text }]}>
+          Set up iCloud, the App Store, and more.
+        </Text>
+      </View>
+    );
+
+    return (
+      <View style={styles.rightContainer}>
+        {content}
+        <Ionicons
+          name="chevron-forward-outline"
+          color={theme.colors.sectionSettingValue}
+          size={22}
+        />
+      </View>
+    );
+  }
 
   return {
     onClick: () => {
@@ -17,32 +69,8 @@ function LoginSetting() {
         ? navigation.navigate("AppleUserScreen")
         : navigation.navigate("AppleSigninScreen");
     },
-    left: (
-      <View style={styles.leftContainer}>
-        <Ionicons
-          name="ios-person"
-          color="black"
-          size={62}
-        ></Ionicons>
-      </View>
-    ),
-    right: (
-      <View style={styles.rightContainer}>
-        <View>
-          <Text style={[styles.title, { color: theme.colors.primary }]}>
-            Sign in to your iPhone
-          </Text>
-          <Text style={[styles.subTitle, { color: theme.colors.text }]}>
-            Set up iCloud, the App Store, and more.
-          </Text>
-        </View>
-        <Ionicons
-          name="chevron-forward-outline"
-          color={theme.colors.sectionSettingValue}
-          size={22}
-        />
-      </View>
-    ),
+    left: createLeftContent(),
+    right: createRightContent(),
   };
 }
 
