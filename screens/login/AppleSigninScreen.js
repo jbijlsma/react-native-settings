@@ -75,6 +75,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
           placeholder="Email"
           value={email}
           onChangeText={onChangeEmailHandler}
+          autoCapitalize="none"
         />
       </View>
       <View
@@ -96,6 +97,8 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
           placeholder="Password"
           value={pwd}
           onChangeText={onChangePwdHandler}
+          autoCapitalize="none"
+          secureTextEntry={true}
         />
       </View>
 
