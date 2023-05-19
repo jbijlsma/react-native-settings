@@ -143,6 +143,7 @@ function Main() {
             component={SettingsStack}
             options={{
               headerShown: false,
+              title: "Settings", // Not for header, but for tab bar
               tabBarIcon: ({ color, size }) => (
                 <Ionicons
                   name="settings-outline"

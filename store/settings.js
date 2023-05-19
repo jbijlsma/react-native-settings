@@ -1,4 +1,5 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
 import { Appearance } from "react-native";
 
 import { OptionsSetting } from "../models/options-setting";
@@ -85,21 +86,22 @@ const initialState = new SettingPage("Settings", [
   ]),
 ]);
 
+const defaultSettingValues = {
+  display_mode: "auto",
+  dark_mode: true,
+  airplane_mode: false,
+  cal1: "g",
+  cal2: "j",
+  cal3: "g",
+  ms1: "m",
+  ms2: "uk",
+  ms3: "uk",
+};
+
 const settingsSlice = createSlice({
   name: "settingsSlice",
   initialState: {
-    settingValues: {
-      // device_color_scheme: "dark",
-      display_mode: "auto",
-      dark_mode: true,
-      airplane_mode: false,
-      cal1: "g",
-      cal2: "j",
-      cal3: "g",
-      ms1: "m",
-      ms2: "uk",
-      ms3: "uk",
-    },
+    settingValues: defaultSettingValues,
     settingOptions: {
       display_mode: [
         new SettingOption("Automatic", "auto"),
@@ -144,6 +146,11 @@ const settingsSlice = createSlice({
       const { settingName, optionValue } = action.payload;
       state.settingValues[settingName] = optionValue;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, (state) => {
+      state.settingValues = defaultSettingValues;
+    });
   },
 });
 

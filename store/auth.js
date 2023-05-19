@@ -1,16 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { PURGE } from "redux-persist";
+
+const defaultState = {
+  user: {
+    isAuthenticated: false,
+  },
+};
 
 const authSlice = createSlice({
   name: "authSlice",
-  initialState: {
-    user: {
-      isAuthenticated: true,
-      fullName: "John Doe",
-      email: "john@doe.com",
-      avatarUri:
-        "https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256",
-    },
-  },
+  initialState: defaultState,
   reducers: {
     login(state) {
       state.user = {
@@ -27,6 +26,11 @@ const authSlice = createSlice({
         isAuthenticated: false,
       };
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(PURGE, (state) => {
+      state.user = defaultState;
+    });
   },
 });
 

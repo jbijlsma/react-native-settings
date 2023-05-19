@@ -1,5 +1,10 @@
-import { View, StyleSheet } from "react-native";
+import { View, Button, StyleSheet } from "react-native";
 import Avatar from "../components/Avatar";
+import { storePersistor } from "../store/store";
+
+function purgeAuthInfo() {
+  storePersistor.purge();
+}
 
 function HomeScreen() {
   return (
@@ -7,6 +12,10 @@ function HomeScreen() {
       <Avatar
         size={200}
         imageUri="https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256"
+      />
+      <Button
+        title="Purge All Saved Redux Store State"
+        onPress={purgeAuthInfo}
       />
     </View>
   );
