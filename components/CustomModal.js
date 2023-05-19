@@ -1,4 +1,5 @@
 import { View, Modal, Button, StyleSheet } from "react-native";
+
 function CustomModal({ backgroundColor, isVisible, onClose, children }) {
   return (
     <View style={[styles.modalContainer]}>
@@ -16,7 +17,7 @@ function CustomModal({ backgroundColor, isVisible, onClose, children }) {
           >
             <View style={styles.modalHeaderBar}>
               <Button
-                title="Close"
+                title="Cancel"
                 onPress={onClose}
               />
             </View>
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
   },
   modalHeaderBar: {
     flexDirection: "row",
+    justifyContent: "space-between",
     padding: 16,
   },
   modalContent: {

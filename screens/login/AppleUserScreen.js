@@ -1,11 +1,20 @@
 import { Pressable, StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { getTheme } from "../../store/settings";
+import { logout } from "../../store/auth";
 
-function AppleUserScreen() {
+function AppleUserScreen({ navigation, onSignoutSuccess }) {
   const theme = useSelector(getTheme);
+  const user = useSelector((state) => state.authSlice.user);
+  const dispatch = useDispatch();
+
+  function signoutHandler() {
+    dispatch(logout());
+    if (onSignoutSuccess) onSignoutSuccess();
+    if (navigation) navigation.goBack();
+  }
 
   return (
     <View style={styles.pageContainer}>
@@ -37,12 +46,13 @@ function AppleUserScreen() {
         </Pressable>
       </View>
       <Text style={[styles.userName, { color: theme.colors.text }]}>
-        Jeroen Bijlsma
+        {user.fullName}
       </Text>
       <Text style={[styles.email, { color: theme.colors.sectionSettingValue }]}>
-        jeroen_bijlsma@apple.com
+        {user.email}
       </Text>
       <Pressable
+        onPress={signoutHandler}
         style={({ pressed }) => [
           styles.signOutBtn,
           { backgroundColor: theme.colors.sectionBackground },

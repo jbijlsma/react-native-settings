@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
@@ -7,11 +8,14 @@ import { useNavigation } from "@react-navigation/native";
 
 function LoginSetting() {
   const theme = useSelector(getTheme);
+  const user = useSelector((state) => state.authSlice.user);
   const navigation = useNavigation();
 
   return {
     onClick: () => {
-      navigation.navigate("AppleSigninScreen");
+      user.isAuthenticated
+        ? navigation.navigate("AppleUserScreen")
+        : navigation.navigate("AppleSigninScreen");
     },
     left: (
       <View style={styles.leftContainer}>

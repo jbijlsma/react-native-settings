@@ -14,6 +14,7 @@ import { getTheme } from "./store/settings";
 import { updateSetting } from "./store/settings";
 import AppleSigninScreen from "./screens/login/AppleSigninScreen";
 import ModalsScreen from "./screens/ModalsScreen";
+import AppleUserScreen from "./screens/login/AppleUserScreen";
 
 function Main() {
   const Tabs = createBottomTabNavigator();
@@ -57,6 +58,15 @@ function Main() {
             component={AppleSigninScreen}
             options={{
               title: "Apple ID",
+              presentation: "modal",
+            }}
+          />
+          <Stack.Screen
+            name="AppleUserScreen"
+            component={AppleUserScreen}
+            options={{
+              title: "Apple ID",
+              presentation: "modal",
             }}
           />
         </Stack.Group>
@@ -79,6 +89,15 @@ function Main() {
           component={AppleSigninScreen}
           options={{
             title: "Apple ID",
+            presentation: "modal",
+          }}
+        />
+        <Stack.Screen
+          name="AppleUserScreen"
+          component={AppleUserScreen}
+          options={{
+            title: "Apple ID",
+            presentation: "modal",
           }}
         />
       </Stack.Navigator>
