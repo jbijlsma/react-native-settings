@@ -1,4 +1,4 @@
-import { StyleSheet, Pressable, Text } from "react-native";
+import { StyleSheet, Pressable, Text, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getTheme, purgeSettings } from "../../store/settings";
@@ -8,7 +8,29 @@ function ResetSettingsToDefaultsSetting() {
   const dispatch = useDispatch();
 
   function resetSettingsHandler() {
-    dispatch(purgeSettings());
+    Alert.alert(
+      "Confirm",
+      "Are you sure you want to set all settings back to their defaults?",
+      [
+        {
+          text: "Yes",
+          onPress: () => {
+            dispatch(purgeSettings());
+            Toast.show("Settings were reset!", {
+              duration: 5000,
+              backgroundColor: "#47de47",
+            });
+          },
+          style: "destructive",
+        },
+        {
+          text: "No",
+          onPress: () => console.log("No Pressed"),
+          style: "cancel",
+        },
+      ],
+      { cancelable: false }
+    );
   }
 
   function createContent() {
