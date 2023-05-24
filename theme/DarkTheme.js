@@ -9,12 +9,14 @@ const DarkTheme = {
     seperator: "rgb(47, 47, 49)",
     notification: "rgb(255, 69, 58)",
 
-    sectionHeader: "rgb(143, 142, 149)",
-    sectionBackground: "rgb(28,28,30)",
-    sectionItemSeperator: "rgb(47, 47, 49)",
-    sectionSettingText: "rgb(253, 253, 253)",
-    sectionSettingValue: "rgb(143, 143, 147)",
-    settingPressedBackground: "rgb(58,58,60)",
+    success: "#1acf14",
+    info: "#40a1f0",
+    error: "rgb(255, 69, 58)",
+
+    background900: "rgb(28,28,30)",
+    background800: "rgb(47, 47, 49)",
+    background700: "rgb(58,58,60)",
+    background400: "rgb(143, 143, 147)",
   },
 };
 

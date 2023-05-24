@@ -8,12 +8,7 @@ function SingleSelectOptionItem({ setting, isSelected }) {
 
   return (
     <>
-      <Text
-        style={[
-          styles.settingTitle,
-          { color: theme.colors.sectionSettingText },
-        ]}
-      >
+      <Text style={[styles.settingTitle, { color: theme.colors.text }]}>
         {setting.title}
       </Text>
       <View style={styles.settingValueContainer}>

@@ -25,7 +25,6 @@ function ResetSettingsToDefaultsSetting() {
         },
         {
           text: "No",
-          onPress: () => console.log("No Pressed"),
           style: "cancel",
         },
       ],
@@ -39,8 +38,8 @@ function ResetSettingsToDefaultsSetting() {
         onPress={resetSettingsHandler}
         style={({ pressed }) => [
           styles.btn,
-          { backgroundColor: theme.colors.sectionBackground },
-          pressed && { backgroundColor: theme.colors.settingPressedBackground },
+          { backgroundColor: theme.colors.background900 },
+          pressed && { backgroundColor: theme.colors.background700 },
         ]}
       >
         <Text style={styles.btnText}>Reset Settings to Defaults</Text>

@@ -27,15 +27,15 @@ function AppleUserScreen({ navigation, onSignoutSuccess }) {
       <Text style={[styles.userName, { color: theme.colors.text }]}>
         {user.fullName}
       </Text>
-      <Text style={[styles.email, { color: theme.colors.sectionSettingValue }]}>
+      <Text style={[styles.email, { color: theme.colors.background400 }]}>
         {user.email}
       </Text>
       <Pressable
         onPress={signoutHandler}
         style={({ pressed }) => [
           styles.signOutBtn,
-          { backgroundColor: theme.colors.sectionBackground },
-          pressed && { backgroundColor: theme.colors.settingPressedBackground },
+          { backgroundColor: theme.colors.background900 },
+          pressed && { backgroundColor: theme.colors.background700 },
         ]}
       >
         <Text style={styles.signOutBtnText}>Sign Out</Text>

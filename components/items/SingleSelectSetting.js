@@ -30,21 +30,16 @@ function SingleSelectSetting({ settingName, settingTitle }) {
 
   return (
     <>
-      <Text
-        style={[
-          styles.settingTitle,
-          { color: theme.colors.sectionSettingText },
-        ]}
-      >
+      <Text style={[styles.settingTitle, { color: theme.colors.text }]}>
         {settingTitle}
       </Text>
       <View style={styles.settingValueContainer}>
-        <Text style={{ color: theme.colors.sectionSettingValue }}>
+        <Text style={{ color: theme.colors.background400 }}>
           {selectedOptionTitle}
         </Text>
         <Ionicons
           name="chevron-forward-outline"
-          color={theme.colors.sectionSettingValue}
+          color={theme.colors.background400}
           size={22}
         />
       </View>

@@ -9,12 +9,14 @@ const LightTheme = {
     seperator: "rgb(235, 235, 236)",
     notification: "rgb(255, 59, 48)",
 
-    sectionHeader: "rgb(138, 138, 143)",
-    sectionBackground: "rgb(255,255,255)",
-    sectionItemSeperator: "rgb(235, 235, 236)",
-    sectionSettingText: "rgb(145, 145, 149)",
-    sectionSettingValue: "rgb(143, 143, 147)",
-    settingPressedBackground: "rgb(209,209,214)",
+    success: "#1acf14",
+    info: "#40a1f0",
+    error: "rgb(255, 69, 58)",
+
+    background900: "rgb(255,255,255)",
+    background800: "rgb(235, 235, 236)",
+    background700: "rgb(209,209,214)",
+    background400: "rgb(143, 143, 147)",
   },
 };
 

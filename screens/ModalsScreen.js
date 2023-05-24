@@ -61,7 +61,7 @@ function ModalsScreen({ navigation }) {
       </View>
 
       <CustomModal
-        backgroundColor={theme.colors.sectionItemSeperator}
+        backgroundColor={theme.colors.background800}
         isVisible={isModalVisible}
         onClose={onCloseModalHandler}
       >

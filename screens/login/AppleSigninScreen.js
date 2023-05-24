@@ -50,7 +50,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
     <View
       style={[
         styles.pageContainer,
-        { backgroundColor: theme.colors.sectionItemSeperator },
+        { backgroundColor: theme.colors.background800 },
       ]}
     >
       <Text style={[styles.title, { color: theme.colors.text }]}>Apple ID</Text>
@@ -63,7 +63,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
         style={[
           styles.inputContainer,
           styles.emailContainer,
-          { backgroundColor: theme.colors.sectionBackground },
+          { backgroundColor: theme.colors.background900 },
         ]}
       >
         <Text style={[styles.inputName, { color: theme.colors.text }]}>
@@ -82,10 +82,10 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
         style={[
           styles.inputContainer,
           styles.pwdContainer,
-          { backgroundColor: theme.colors.sectionBackground },
+          { backgroundColor: theme.colors.background900 },
           {
             borderTopWidth: 1,
-            borderTopColor: theme.colors.settingPressedBackground,
+            borderTopColor: theme.colors.background700,
           },
         ]}
       >
@@ -107,8 +107,8 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
         disabled={!isLoginBtnEnabled}
         style={({ pressed }) => [
           styles.signInBtn,
-          { backgroundColor: theme.colors.sectionBackground },
-          pressed && { backgroundColor: theme.colors.settingPressedBackground },
+          { backgroundColor: theme.colors.background900 },
+          pressed && { backgroundColor: theme.colors.background700 },
         ]}
       >
         <Text
@@ -116,7 +116,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
             styles.signInBtnText,
             { color: theme.colors.primary },
             !isLoginBtnEnabled && {
-              color: theme.colors.sectionSettingValue,
+              color: theme.colors.background400,
             },
           ]}
         >

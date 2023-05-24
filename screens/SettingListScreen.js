@@ -57,7 +57,7 @@ function SettingListScreen({ route }) {
         style={[
           styles.sectionHeader,
           {
-            color: theme.colors.sectionHeader,
+            color: theme.colors.background400,
             marginLeft: section.headerMarginLeft,
           },
         ]}

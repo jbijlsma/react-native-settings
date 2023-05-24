@@ -59,7 +59,7 @@ function Item({
           styles.innerBoxRight,
           hasPrevSibbling && {
             borderTopWidth: 1,
-            borderTopColor: theme.colors.settingPressedBackground,
+            borderTopColor: theme.colors.background700,
           },
         ]}
       >
@@ -80,11 +80,11 @@ function Item({
         hasPrevSibbling && { marginTop: -1 },
         pressableBorderRadius,
         {
-          backgroundColor: theme.colors.sectionBackground,
+          backgroundColor: theme.colors.background900,
         },
         isPressable &&
           pressed && {
-            backgroundColor: theme.colors.settingPressedBackground,
+            backgroundColor: theme.colors.background700,
             zIndex: 100,
           },
       ]}

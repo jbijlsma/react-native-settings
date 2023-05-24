@@ -12,20 +12,20 @@ function Toast({ id, messageType, message, showForMs, onClose }) {
   const theme = useSelector(getTheme);
 
   const hideAfterMs = showForMs || 5000;
-  const bgColor = theme.colors.sectionItemSeperator;
+  const bgColor = theme.colors.background800;
   const messageTypeColor =
     messageType === "SUCCESS"
-      ? "#1acf14"
+      ? theme.colors.success
       : messageType === "INFO"
-      ? "#40a1f0"
-      : "#c32e2e";
+      ? theme.colors.info
+      : theme.colors.error;
   const messageTypeIcon =
     messageType === "SUCCESS"
       ? "check-circle"
       : messageType === "INFO"
       ? "alert-circle"
       : "x-circle";
-  const btnBackgroundColor = theme.colors.sectionBackground;
+  const btnBackgroundColor = theme.colors.background900;
   const textColor = theme.colors.text;
 
   useEffect(() => {

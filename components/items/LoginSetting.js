@@ -56,7 +56,7 @@ function LoginSetting() {
         {content}
         <Ionicons
           name="chevron-forward-outline"
-          color={theme.colors.sectionSettingValue}
+          color={theme.colors.background400}
           size={22}
         />
       </View>
