@@ -1,11 +1,14 @@
+import { useContext } from "react";
 import { StyleSheet, Pressable, Text, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import { getTheme, purgeSettings } from "../../store/settings";
+import { ToastContext } from "../Toast/ToastProvider";
 
 function ResetSettingsToDefaultsSetting() {
   const theme = useSelector(getTheme);
   const dispatch = useDispatch();
+  const { toast } = useContext(ToastContext);
 
   function resetSettingsHandler() {
     Alert.alert(
@@ -16,10 +19,7 @@ function ResetSettingsToDefaultsSetting() {
           text: "Yes",
           onPress: () => {
             dispatch(purgeSettings());
-            Toast.show("Settings were reset!", {
-              duration: 5000,
-              backgroundColor: "#47de47",
-            });
+            toast.success({ message: "Settings were reset!", showForMs: 2000 });
           },
           style: "destructive",
         },
