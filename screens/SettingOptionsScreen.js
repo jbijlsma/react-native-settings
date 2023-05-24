@@ -1,6 +1,6 @@
 import { useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import ItemGroup from "../components/ItemGroup";
 import { updateSetting } from "../store/settings";
@@ -38,16 +38,18 @@ function SettingOptionsScreen({ navigation, route }) {
   }
 
   return (
-    <View style={styles.container}>
-      <View>
-        <ItemGroup
-          items={settingOptions}
-          itemKeyExtractor={(item) => item.value}
-          isOptionSelected={(option) => option.value === settingValue}
-          onPress={onPressHandler}
-        />
+    <ScrollView>
+      <View style={styles.container}>
+        <View>
+          <ItemGroup
+            items={settingOptions}
+            itemKeyExtractor={(item) => item.value}
+            isOptionSelected={(option) => option.value === settingValue}
+            onPress={onPressHandler}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 

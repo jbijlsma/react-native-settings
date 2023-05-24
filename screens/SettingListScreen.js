@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { useLayoutEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
@@ -80,7 +80,11 @@ function SettingListScreen({ route }) {
     );
   });
 
-  return <View style={styles.pageContainer}>{sections}</View>;
+  return (
+    <ScrollView>
+      <View style={styles.pageContainer}>{sections}</View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
