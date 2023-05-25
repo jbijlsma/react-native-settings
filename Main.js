@@ -21,6 +21,9 @@ function Main() {
   const Stack = createStackNavigator();
 
   const theme = useSelector(getTheme);
+  const displayMode = useSelector(
+    (state) => state.settingsSlice.settingValues["display_mode"]
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -104,9 +107,16 @@ function Main() {
     );
   }
 
+  const statusBarStyle =
+    displayMode === "dark"
+      ? "light"
+      : displayMode === "light"
+      ? "dark"
+      : "auto";
+
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style={statusBarStyle} />
       <NavigationContainer theme={theme}>
         <Tabs.Navigator initialRouteName="SettingsStack">
           <Tabs.Screen
