@@ -10,7 +10,8 @@ import Toast from "./Toast";
 
 export const ToastContext = createContext({
   success: (_) => null,
-  position: "TOP",
+  info: (_) => null,
+  error: (_) => null,
 });
 
 const ToastProvider = ({ children }) => {
@@ -38,7 +39,13 @@ const ToastProvider = ({ children }) => {
   }, []);
   return (
     <ToastContext.Provider
-      value={{ toast: { success: success, info: info, error: error } }}
+      value={{
+        toast: {
+          success: success,
+          info: info,
+          error: error,
+        },
+      }}
     >
       {children}
       <View

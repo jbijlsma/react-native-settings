@@ -42,7 +42,9 @@ function ResetSettingsToDefaultsSetting() {
           pressed && { backgroundColor: theme.colors.background700 },
         ]}
       >
-        <Text style={styles.btnText}>Reset Settings to Defaults</Text>
+        <Text style={[styles.btnText, { color: theme.colors.notification }]}>
+          Reset Settings to Defaults
+        </Text>
       </Pressable>
     );
   }
@@ -62,7 +64,6 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 17,
-    color: "#ff5151",
   },
 });
 

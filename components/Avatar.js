@@ -1,10 +1,6 @@
 import { View, ImageBackground, StyleSheet } from "react-native";
-import { useSelector } from "react-redux";
-import { getTheme } from "../store/settings";
 
 function Avatar({ size, imageUri }) {
-  const theme = useSelector(getTheme);
-
   return (
     <View
       style={[
