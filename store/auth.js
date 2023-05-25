@@ -14,8 +14,8 @@ const authSlice = createSlice({
     login(state) {
       state.user = {
         isAuthenticated: true,
-        fullName: "John Doe",
-        email: "john@doe.com",
+        fullName: "Jeroen Bijlsma",
+        email: "jeroen@bijlsma.com",
         avatarUri:
           "https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256",
       };
