@@ -51,7 +51,9 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
     <View
       style={[
         styles.pageContainer,
-        { backgroundColor: theme.colors.background800 },
+        {
+          backgroundColor: theme.colors.background800,
+        },
       ]}
     >
       <Text style={[styles.title, { color: theme.colors.text }]}>Apple ID</Text>
@@ -134,6 +136,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 8,
     alignItems: "center",
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
   },
   title: {
     paddingTop: "30%",

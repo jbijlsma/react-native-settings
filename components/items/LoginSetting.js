@@ -43,7 +43,7 @@ function LoginSetting() {
         </Text>
       </View>
     ) : (
-      <View>
+      <View style={{ flex: 1, flexShrink: 1 }}>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
           {i18n.t("appleSignInMessage")}
         </Text>
@@ -79,8 +79,6 @@ function LoginSetting() {
 const styles = StyleSheet.create({
   leftContainer: {
     borderRadius: 30,
-    width: 60,
-    height: 60,
     backgroundColor: "rgb(90,90,90)",
     justifyContent: "center",
     alignItems: "center",
