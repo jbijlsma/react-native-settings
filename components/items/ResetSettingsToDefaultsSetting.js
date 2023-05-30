@@ -2,29 +2,34 @@ import { useContext } from "react";
 import { StyleSheet, Pressable, Text, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
-import { getTheme, purgeSettings } from "../../store/settings";
+import { getI18n, getTheme, purgeSettings } from "../../store/settings";
 import { ToastContext } from "../Toast/ToastProvider";
 
 function ResetSettingsToDefaultsSetting() {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
+
   const dispatch = useDispatch();
   const { toast } = useContext(ToastContext);
 
   function resetSettingsHandler() {
     Alert.alert(
-      "Confirm",
-      "Are you sure you want to set all settings back to their defaults?",
+      i18n.t("confirm"),
+      i18n.t("confirmPurgeSettings"),
       [
         {
-          text: "Yes",
+          text: i18n.t("yes"),
           onPress: () => {
             dispatch(purgeSettings());
-            toast.success({ message: "Settings were reset!", showForMs: 2000 });
+            toast.success({
+              message: i18n.t("notifyPurgeSettings"),
+              showForMs: 2000,
+            });
           },
           style: "destructive",
         },
         {
-          text: "No",
+          text: i18n.t("no"),
           style: "cancel",
         },
       ],
@@ -43,7 +48,7 @@ function ResetSettingsToDefaultsSetting() {
         ]}
       >
         <Text style={[styles.btnText, { color: theme.colors.notification }]}>
-          Reset Settings to Defaults
+          {i18n.t("purgeSettings")}
         </Text>
       </Pressable>
     );

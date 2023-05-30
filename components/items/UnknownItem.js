@@ -1,7 +1,7 @@
 import { Text, StyleSheet } from "react-native";
 
-function UnknownItem(item) {
-  return <Text style={styles.text}>{item.title}</Text>;
+function UnknownItem({ settingName }) {
+  return <Text style={styles.text}>{itemName}</Text>;
 }
 
 const styles = StyleSheet.create({

@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getTheme } from "../../store/settings";
+import { getI18n, getTheme } from "../../store/settings";
 
 import { login } from "../../store/auth";
 
@@ -20,6 +20,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
   const isLoginBtnEnabled = email.length > 0 && pwd.length > 0;
 
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
 
   const dispatch = useDispatch();
 
@@ -55,8 +56,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
     >
       <Text style={[styles.title, { color: theme.colors.text }]}>Apple ID</Text>
       <Text style={[styles.subtitle, { color: theme.colors.text }]}>
-        Sign in with your Apple ID to use iCloud the App Store and other Apple
-        services
+        {i18n.t("appleSignInDetails")}
       </Text>
 
       <View
@@ -72,7 +72,7 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
         <TextInput
           ref={emailRef}
           style={[styles.email, { color: theme.colors.text }]}
-          placeholder="Email"
+          placeholder={i18n.t("email")}
           value={email}
           onChangeText={onChangeEmailHandler}
           autoCapitalize="none"
@@ -90,11 +90,11 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
         ]}
       >
         <Text style={[styles.inputName, { color: theme.colors.text }]}>
-          Password
+          {i18n.t("password")}
         </Text>
         <TextInput
           style={[styles.pwd, { color: theme.colors.text }]}
-          placeholder="Password"
+          placeholder={i18n.t("password")}
           value={pwd}
           onChangeText={onChangePwdHandler}
           autoCapitalize="none"
@@ -120,11 +120,11 @@ function AppleSigninScreen({ navigation, onSigninSuccess }) {
             },
           ]}
         >
-          Sign In
+          {i18n.t("signIn")}
         </Text>
       </Pressable>
 
-      <Button title="Forgot password or don't have an Apple ID?" />
+      <Button title={i18n.t("forgotPassword")} />
     </View>
   );
 }
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 12,
   },
   inputName: {
-    width: 90,
+    width: 110,
     fontSize: 18,
     fontWeight: "bold",
     color: "white",

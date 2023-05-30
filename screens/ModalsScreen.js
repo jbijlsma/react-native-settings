@@ -3,12 +3,13 @@ import { Button, StyleSheet, View, Text } from "react-native";
 
 import CustomModal from "../components/CustomModal";
 import { useSelector } from "react-redux";
-import { getTheme } from "../store/settings";
+import { getI18n, getTheme } from "../store/settings";
 import AppleSigninScreen from "./login/AppleSigninScreen";
 import AppleUserScreen from "./login/AppleUserScreen";
 
 function ModalsScreen({ navigation }) {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
   const user = useSelector((state) => state.authSlice.user);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -40,7 +41,7 @@ function ModalsScreen({ navigation }) {
   return (
     <>
       <Text style={[styles.isAuthenticatedText, { color: theme.colors.text }]}>
-        IsAuthenticated: {user.isAuthenticated ? "Yes" : "No"}
+        IsAuthenticated: {user.isAuthenticated ? i18n.t("yes") : i18n.t("no")}
       </Text>
       <Text style={[styles.email, { color: theme.colors.text }]}>
         Email: {user.email}
@@ -48,13 +49,13 @@ function ModalsScreen({ navigation }) {
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
           <Button
-            title="Show Modal"
+            title={i18n.t("showModal")}
             onPress={onShowModalHandler}
           />
         </View>
         <View style={styles.buttonContainer}>
           <Button
-            title="Show Modal (using navigation)"
+            title={i18n.t("showModalNav")}
             onPress={onShowModalNavHandler}
           />
         </View>

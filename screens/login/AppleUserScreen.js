@@ -2,12 +2,14 @@ import { Pressable, StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getTheme } from "../../store/settings";
+import { getI18n, getTheme } from "../../store/settings";
 import { logout } from "../../store/auth";
 import Avatar from "../../components/Avatar";
 
 function AppleUserScreen({ navigation, onSignoutSuccess }) {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
+
   const user = useSelector((state) => state.authSlice.user);
   const dispatch = useDispatch();
 
@@ -38,7 +40,7 @@ function AppleUserScreen({ navigation, onSignoutSuccess }) {
           pressed && { backgroundColor: theme.colors.background700 },
         ]}
       >
-        <Text style={styles.signOutBtnText}>Sign Out</Text>
+        <Text style={styles.signOutBtnText}>{i18n.t("signOut")}</Text>
       </Pressable>
     </View>
   );

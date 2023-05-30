@@ -1,6 +1,8 @@
 import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { PURGE } from "redux-persist";
 import { Appearance } from "react-native";
+import { getLocales } from "expo-localization";
+import { I18n } from "i18n-js";
 
 import { OptionsSetting } from "../models/options-setting";
 import { SettingSection } from "../models/setting-section";
@@ -13,23 +15,31 @@ import { SettingLogin } from "../models/setting-login";
 import DarkTheme from "../theme/DarkTheme";
 import LightTheme from "../theme/LightTheme";
 import { SettingResetSettings } from "../models/setting-reset-settings";
+import { supportedLanguages } from "../i18n/supportedLanguages";
 
-const createCalendarSetting = (id) => new OptionsSetting(id, "Calendar");
+const createCalendarSetting = () => new OptionsSetting("calendar");
 
-const createMeasurementSystemSetting = (id) =>
-  new OptionsSetting(id, "Measurement System");
+const createMeasurementSystemSetting = () =>
+  new OptionsSetting("measurement_system");
 
-const initialState = new SettingPage("Settings", [
+const initialState = new SettingPage("settings", [
   new SettingSection(null, 40, [new SettingLogin("login")]),
   new SettingSection(null, 40, [
-    new OptionsSetting("display_mode", "Display Mode", {
+    new OptionsSetting("display_mode", {
       name: "ios-moon",
       color: "white",
-      backgroundColor: "rgb(52, 120, 247)",
+      backgroundColor: "rgb(3, 6, 10)",
     }),
   ]),
   new SettingSection(null, 40, [
-    new SettingInlineSwitch("airplane_mode", "Airplane Mode", {
+    new OptionsSetting("language", {
+      name: "ios-language",
+      color: "white",
+      backgroundColor: "rgb(142, 142, 147)",
+    }),
+  ]),
+  new SettingSection(null, 40, [
+    new SettingInlineSwitch("airplane_mode", {
       name: "ios-airplane",
       color: "white",
       backgroundColor: "rgb(241,154,56)",
@@ -37,13 +47,11 @@ const initialState = new SettingPage("Settings", [
   ]),
   new SettingSection(null, 40, [
     new SettingPageLinkSetting(
-      "SettingPageLink",
       "general",
-      "General",
-      new SettingPage(null, [
-        new SettingSection("ONE LEVEL DEEPER", 16, [
-          createCalendarSetting("cal1"),
-          createMeasurementSystemSetting("ms1"),
+      new SettingPage("general", [
+        new SettingSection("one_level_deeper", 16, [
+          createCalendarSetting(),
+          createMeasurementSystemSetting(),
         ]),
       ]),
       {
@@ -53,13 +61,11 @@ const initialState = new SettingPage("Settings", [
       }
     ),
     new SettingPageLinkSetting(
-      "SettingPageLink",
       "display_and_brightness",
-      "Display and Brightness",
-      new SettingPage(null, [
-        new SettingSection("ONE LEVEL DEEPER", 16, [
-          createCalendarSetting("cal2"),
-          createMeasurementSystemSetting("ms2"),
+      new SettingPage("display_and_brightness", [
+        new SettingSection("", 16, [
+          createCalendarSetting(),
+          createMeasurementSystemSetting(),
         ]),
       ]),
       {
@@ -69,13 +75,11 @@ const initialState = new SettingPage("Settings", [
       }
     ),
     new SettingPageLinkSetting(
-      "SettingPageLink",
       "privacy_and_security",
-      "Privacy & Security",
-      new SettingPage(null, [
-        new SettingSection("ONE LEVEL DEEPER", 16, [
-          createCalendarSetting("cal3"),
-          createMeasurementSystemSetting("ms3"),
+      new SettingPage("privacy_and_security", [
+        new SettingSection("one_level_deeper", 16, [
+          createCalendarSetting(),
+          createMeasurementSystemSetting(),
         ]),
       ]),
       {
@@ -90,14 +94,11 @@ const initialState = new SettingPage("Settings", [
 
 const defaultSettingValues = {
   display_mode: "auto",
+  language: getLocales()[0].languageCode,
   dark_mode: true,
   airplane_mode: false,
-  cal1: "g",
-  cal2: "j",
-  cal3: "g",
-  ms1: "m",
-  ms2: "uk",
-  ms3: "uk",
+  calendar: "g",
+  measurement_system: "m",
 };
 
 const settingsSlice = createSlice({
@@ -106,39 +107,24 @@ const settingsSlice = createSlice({
     settingValues: defaultSettingValues,
     settingOptions: {
       display_mode: [
-        new SettingOption("Automatic", "auto"),
-        new SettingOption("Dark", "dark"),
-        new SettingOption("Light", "light"),
+        new SettingOption("display_auto", "auto"),
+        new SettingOption("display_dark", "dark"),
+        new SettingOption("display_light", "light"),
       ],
-      cal1: [
-        new SettingOption("Gregorian", "g"),
-        new SettingOption("Japanese", "j"),
-        new SettingOption("Buddhist", "b"),
+      language: [
+        new SettingOption("language_en", "en"),
+        new SettingOption("language_nl", "nl"),
+        new SettingOption("language_de", "de"),
       ],
-      cal2: [
-        new SettingOption("Gregorian", "g"),
-        new SettingOption("Japanese", "j"),
-        new SettingOption("Buddhist", "b"),
+      calendar: [
+        new SettingOption("cal_gregorian", "g"),
+        new SettingOption("cal_japanese", "j"),
+        new SettingOption("cal_buddhist", "b"),
       ],
-      cal3: [
-        new SettingOption("Gregorian", "g"),
-        new SettingOption("Japanese", "j"),
-        new SettingOption("Buddhist", "b"),
-      ],
-      ms1: [
-        new SettingOption("Metric", "m"),
-        new SettingOption("US", "us"),
-        new SettingOption("UK", "uk"),
-      ],
-      ms2: [
-        new SettingOption("Metric", "m"),
-        new SettingOption("US", "us"),
-        new SettingOption("UK", "uk"),
-      ],
-      ms3: [
-        new SettingOption("Metric", "m"),
-        new SettingOption("US", "us"),
-        new SettingOption("UK", "uk"),
+      measurement_system: [
+        new SettingOption("ms_metric", "m"),
+        new SettingOption("ms_us", "us"),
+        new SettingOption("ms_uk", "uk"),
       ],
     },
     rootSettingsPage: initialState,
@@ -172,6 +158,28 @@ export const getTheme = createSelector(
         const colorScheme = deviceColorScheme ?? Appearance.getColorScheme();
         return colorScheme === "dark" ? DarkTheme : LightTheme;
     }
+  }
+);
+
+export const getI18n = createSelector(
+  (state) => state.settingsSlice.settingValues["language"],
+  (language) => {
+    let selectedLanguageCode = language;
+    const supportedLanguageCodes = Object.keys(supportedLanguages);
+
+    if (!supportedLanguageCodes.indexOf(selectedLanguageCode)) {
+      selectedLanguageCode = getLocales()[0].languageCode;
+      if (!supportedLanguageCodes.indexOf(selectedLanguageCode)) {
+        selectedLanguageCode = supportedLanguageCodes[0];
+      }
+    }
+
+    const i18n = new I18n(supportedLanguages);
+
+    i18n.locale = selectedLanguageCode;
+    i18n.enableFallback = true;
+
+    return i18n;
   }
 );
 

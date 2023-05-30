@@ -1,8 +1,8 @@
-export function SettingOption(title, value) {
+export function SettingOption(name, value) {
   return {
     isPressable: true,
     type: "SingleSelectOptionItem",
-    title: title,
+    name: name,
     value: value,
   };
 }

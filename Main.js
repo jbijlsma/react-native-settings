@@ -10,7 +10,7 @@ import SettingListScreen from "./screens/SettingListScreen";
 import HomeScreen from "./screens/HomeScreen";
 import SettingOptionsScreen from "./screens/SettingOptionsScreen";
 import { useDispatch, useSelector } from "react-redux";
-import { getTheme } from "./store/settings";
+import { getI18n, getTheme } from "./store/settings";
 import { updateSetting } from "./store/settings";
 import AppleSigninScreen from "./screens/login/AppleSigninScreen";
 import ModalsScreen from "./screens/ModalsScreen";
@@ -24,6 +24,7 @@ function Main() {
   const displayMode = useSelector(
     (state) => state.settingsSlice.settingValues["display_mode"]
   );
+  const i18n = useSelector(getI18n);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function Main() {
             name="SettingListScreen"
             component={SettingListScreen}
             options={{
-              title: "Settings",
+              title: i18n.t("settings"),
             }}
           />
           <Stack.Screen
@@ -84,7 +85,7 @@ function Main() {
           name="ModalsScreen"
           component={ModalsScreen}
           options={{
-            title: "Modals",
+            title: i18n.t("modals"),
           }}
         />
         <Stack.Screen
@@ -120,7 +121,7 @@ function Main() {
       <NavigationContainer theme={theme}>
         <Tabs.Navigator initialRouteName="SettingsStack">
           <Tabs.Screen
-            name="Home"
+            name={i18n.t("home")}
             component={HomeScreen}
             options={{
               headerShown: true,
@@ -138,7 +139,7 @@ function Main() {
             component={ModalsStack}
             options={{
               headerShown: false,
-              title: "Modals",
+              title: i18n.t("modals"),
               tabBarIcon: ({ color, size }) => (
                 <Ionicons
                   name="ios-copy"
@@ -153,7 +154,7 @@ function Main() {
             component={SettingsStack}
             options={{
               headerShown: false,
-              title: "Settings", // Not for header, but for tab bar
+              title: i18n.t("settings"), // Not for header, but for tab bar
               tabBarIcon: ({ color, size }) => (
                 <Ionicons
                   name="settings-outline"

@@ -2,10 +2,11 @@ import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-import { getTheme } from "../../store/settings";
+import { getI18n, getTheme } from "../../store/settings";
 
-function SingleSelectSetting({ settingName, settingTitle }) {
+function SingleSelectSetting({ settingName }) {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
 
   const settingOptions = useSelector(
     (state) => state.settingsSlice.settingOptions[settingName]
@@ -19,14 +20,17 @@ function SingleSelectSetting({ settingName, settingTitle }) {
   }
 
   function getSelectedOptionTitle() {
-    var title = settingOptions.find(
+    var selectedOption = settingOptions.find(
       (option) => option.value === settingValue
-    ).title;
+    );
+
+    const title = i18n.t(selectedOption.name);
 
     return capitalizeFirstLetter(title);
   }
 
   const selectedOptionTitle = getSelectedOptionTitle();
+  const settingTitle = i18n.t(settingName);
 
   return (
     <>

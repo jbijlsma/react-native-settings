@@ -1,9 +1,8 @@
-export function SettingPageLinkSetting(type, name, title, linkedPage, icon) {
+export function SettingPageLinkSetting(name, linkedPage, icon) {
   return {
     isPressable: true,
-    type: type,
+    type: "SettingPageLink",
     name: name,
-    title: title,
     linkedPage: linkedPage,
     icon,
   };

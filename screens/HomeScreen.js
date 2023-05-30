@@ -4,33 +4,36 @@ import Avatar from "../components/Avatar";
 import { storePersistor } from "../store/store";
 import { useContext } from "react";
 import { ToastContext } from "../components/Toast/ToastProvider";
+import { useSelector } from "react-redux";
+import { getI18n } from "../store/settings";
 
 function HomeScreen() {
   const { toast } = useContext(ToastContext);
+  const i18n = useSelector(getI18n);
 
   function purgeAuthInfo() {
     storePersistor.purge();
     toast.success({
-      message: "All settings were reset to their defaults!",
+      message: i18n.t("settingsPurged"),
       showForMs: 1000,
     });
   }
 
   function showSuccessToast() {
     toast.success({
-      message: "Congrats! This is a success toast.",
+      message: i18n.t("successToast"),
     });
   }
 
   function showInfoToast() {
     toast.info({
-      message: "This is an info toast.",
+      message: i18n.t("infoToast"),
     });
   }
 
   function showErrorToast() {
     toast.error({
-      message: "Sorry! This is an error toast.",
+      message: i18n.t("errorToast"),
     });
   }
 
@@ -42,20 +45,20 @@ function HomeScreen() {
           imageUri="https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256"
         />
         <Button
-          title="Purge All Saved Redux Store State"
+          title={i18n.t("purgeSettings")}
           onPress={purgeAuthInfo}
         />
         <Button
-          title="Show Success Toast"
+          title={i18n.t("showSuccessToast")}
           onPress={showSuccessToast}
         />
         <Button
-          title="Show Error Toast"
-          onPress={showErrorToast}
+          title={i18n.t("showInfoToast")}
+          onPress={showInfoToast}
         />
         <Button
-          title="Show Info Toast"
-          onPress={showInfoToast}
+          title={i18n.t("showErrorToast")}
+          onPress={showErrorToast}
         />
       </View>
     </>

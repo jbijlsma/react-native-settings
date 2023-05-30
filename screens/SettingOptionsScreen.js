@@ -3,10 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 import ItemGroup from "../components/ItemGroup";
-import { updateSetting } from "../store/settings";
+import { getI18n, updateSetting } from "../store/settings";
 
 function SettingOptionsScreen({ navigation, route }) {
-  const { settingName, settingTitle, backTitle } = route.params;
+  const { settingName, settingTitle } = route.params;
+  const i18n = useSelector(getI18n);
 
   const settingOptions = useSelector(
     (state) => state.settingsSlice.settingOptions[settingName]
@@ -19,14 +20,11 @@ function SettingOptionsScreen({ navigation, route }) {
   const dispatch = useDispatch();
 
   useLayoutEffect(() => {
-    navigation.setOptions(
-      {
-        title: settingTitle,
-        headerBackTitle: backTitle ?? "Back",
-      },
-      [backTitle, settingTitle]
-    );
-  }, []);
+    navigation.setOptions({
+      title: i18n.t(settingName),
+      headerBackTitle: i18n.t("back"),
+    });
+  }, [settingTitle, i18n]);
 
   function onPressHandler(option) {
     dispatch(

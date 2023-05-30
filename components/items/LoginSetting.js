@@ -2,12 +2,14 @@ import { StyleSheet, View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
-import { getTheme } from "../../store/settings";
+import { getI18n, getTheme } from "../../store/settings";
 import { useNavigation } from "@react-navigation/native";
 import Avatar from "../Avatar";
 
 function LoginSetting() {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
+
   const user = useSelector((state) => state.authSlice.user);
   const navigation = useNavigation();
 
@@ -37,16 +39,16 @@ function LoginSetting() {
           {user.fullName}
         </Text>
         <Text style={[styles.subTitle, { color: theme.colors.text }]}>
-          Apple ID, iCloud+, Media & Purchases
+          {i18n.t("appleSignInTitle")}
         </Text>
       </View>
     ) : (
       <View>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
-          Sign in to your iPhone
+          {i18n.t("appleSignInMessage")}
         </Text>
         <Text style={[styles.subTitle, { color: theme.colors.text }]}>
-          Set up iCloud, the App Store, and more.
+          {i18n.t("appleSetupIcloud")}
         </Text>
       </View>
     );

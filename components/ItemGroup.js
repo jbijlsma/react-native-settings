@@ -19,31 +19,26 @@ function ItemGroup({ items, itemKeyExtractor, isOptionSelected, onPress }) {
       case "SettingResetSettingDefaults":
         return ResetSettingsToDefaultsSetting();
       case "SettingInlineSwitch":
-        return { right: <InlineSwitchSetting setting={item} /> };
+        return { right: <InlineSwitchSetting settingName={item.name} /> };
       case "SettingPageLink":
-        return { right: <SettingPageLink setting={item} /> };
+        return { right: <SettingPageLink settingName={item.name} /> };
       case "SingleSelectSetting":
         return {
-          right: (
-            <SingleSelectSetting
-              settingName={item.name}
-              settingTitle={item.title}
-            />
-          ),
+          right: <SingleSelectSetting settingName={item.name} />,
         };
       case "SingleSelectOptionItem":
         const isSelected = isOptionSelected(item);
         return {
           right: (
             <SingleSelectOptionItem
-              setting={item}
+              settingName={item.name}
               isSelected={isSelected}
             />
           ),
         };
       default:
         console.log("default");
-        return { right: <UnknownItem item={item} /> };
+        return { right: <UnknownItem settingName={item.name} /> };
     }
   }
 

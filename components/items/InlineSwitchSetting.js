@@ -1,26 +1,27 @@
 import { StyleSheet, Switch, Text, View } from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getTheme, updateSetting } from "../../store/settings";
+import { getI18n, getTheme, updateSetting } from "../../store/settings";
 
-function InlineSwitchSetting({ setting }) {
+function InlineSwitchSetting({ settingName }) {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
 
   const settingValue = useSelector(
-    (state) => state.settingsSlice.settingValues[setting.name]
+    (state) => state.settingsSlice.settingValues[settingName]
   );
   const dispatch = useDispatch();
 
   function toggleHandler() {
     dispatch(
-      updateSetting({ settingName: setting.name, optionValue: !settingValue })
+      updateSetting({ settingName: settingName, optionValue: !settingValue })
     );
   }
 
   return (
     <>
       <Text style={[styles.settingTitle, { color: theme.colors.text }]}>
-        {setting?.title}
+        {i18n.t(settingName)}
       </Text>
       <View style={styles.settingValueContainer}>
         <Switch

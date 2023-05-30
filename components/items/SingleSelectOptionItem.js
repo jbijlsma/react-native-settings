@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
-import { getTheme } from "../../store/settings";
+import { getI18n, getTheme } from "../../store/settings";
 
-function SingleSelectOptionItem({ setting, isSelected }) {
+function SingleSelectOptionItem({ settingName, isSelected }) {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
 
   return (
     <>
       <Text style={[styles.settingTitle, { color: theme.colors.text }]}>
-        {setting.title}
+        {i18n.t(settingName)}
       </Text>
       <View style={styles.settingValueContainer}>
         {isSelected && (

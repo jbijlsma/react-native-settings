@@ -1,9 +1,8 @@
-export function SettingInlineSwitch(name, title, icon) {
+export function SettingInlineSwitch(name, icon) {
   return {
     type: "SettingInlineSwitch",
     isPressable: false,
     name: name,
-    title: title,
     icon: icon,
   };
 }

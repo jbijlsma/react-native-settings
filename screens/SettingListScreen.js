@@ -4,13 +4,13 @@ import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
 import ItemGroup from "../components/ItemGroup";
-import { getTheme } from "../store/settings";
+import { getI18n, getTheme } from "../store/settings";
 
 function SettingListScreen({ route }) {
   const theme = useSelector(getTheme);
+  const i18n = useSelector(getI18n);
 
   const title = route.params?.title;
-  const backTitle = route.params?.backTitle;
 
   const navigation = useNavigation();
 
@@ -18,19 +18,21 @@ function SettingListScreen({ route }) {
     (state) => state.settingsSlice.rootSettingsPage
   );
   const page = route.params?.page ?? rootSettingsPage;
-  const pageTitle = page.title ?? title;
+  const pageTitle = i18n.t(page.title) ?? title;
 
   useLayoutEffect(() => {
     navigation.setOptions(
       {
         title: pageTitle,
-        headerBackTitle: backTitle,
+        headerBackTitle: i18n.t("back"),
       },
-      [pageTitle, backTitle]
+      [pageTitle]
     );
   }, []);
 
   function settingPressHandler(setting, itemContent) {
+    const settingTitle = i18n.t(setting.title);
+
     switch (setting.type) {
       case "SettingLogin":
         itemContent.onClick();
@@ -38,15 +40,13 @@ function SettingListScreen({ route }) {
       case "SettingPageLink":
         navigation.push("SettingListScreen", {
           page: setting.linkedPage,
-          title: setting.title,
-          backTitle: pageTitle,
+          title: settingTitle,
         });
         break;
       default:
         navigation.navigate("SettingOptionsScreen", {
           settingName: setting.name,
-          settingTitle: setting.title,
-          backTitle: pageTitle,
+          settingTitle: settingTitle,
         });
     }
   }
@@ -62,7 +62,7 @@ function SettingListScreen({ route }) {
           },
         ]}
       >
-        {section.title.toUpperCase()}
+        {i18n.t(section.title).toUpperCase()}
       </Text>
     ) : null;
 
