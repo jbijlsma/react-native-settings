@@ -23,7 +23,8 @@ Alternatives to create mockups / app store screenshots and videos:
 - Angle plugin for Figma (https://www.figma.com/community/plugin/778645840235495725/Angle-Mockups): free library of mockups / shapes, but customizing them works best with the paid version of Figma (Professional).
 - Vectary 3D Elements plugin for Figma (https://www.figma.com/community/plugin/769588393361258724/Vectary-3D-Elements): loads of interesting 3D shapes
 
-Here is an example of an app video made using Rotato, exported in ProRes4444 2K and then 'shared' using iMovie as a Low Quality File in 540P 60 resolution and Compress set to Better Quality: 
+Here is an example of an app video made using Rotato, exported in ProRes4444 2K and then 'shared' using iMovie as a Low Quality File in 540P 60 resolution and Compress set to Better Quality:
 
 https://github.com/jbijlsma/react-native-settings/assets/535436/563b40bc-18ae-424f-83f5-4258890e3209
 
+Note: to upload a video in Github just drag it in the README.md file when editing on github.com (max 10 MB upload for free account).
