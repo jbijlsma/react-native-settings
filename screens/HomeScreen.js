@@ -44,22 +44,33 @@ function HomeScreen() {
           size={200}
           imageUri="https://secure.gravatar.com/avatar/dad0b79139b72a32fafc32e123558b01?s=256"
         />
-        <Button
-          title={i18n.t("purgeSettings")}
-          onPress={purgeAuthInfo}
-        />
-        <Button
-          title={i18n.t("showSuccessToast")}
-          onPress={showSuccessToast}
-        />
-        <Button
-          title={i18n.t("showInfoToast")}
-          onPress={showInfoToast}
-        />
-        <Button
-          title={i18n.t("showErrorToast")}
-          onPress={showErrorToast}
-        />
+        <View style={styles.btn}>
+          <Button
+            title={i18n.t("purgeSettings")}
+            onPress={purgeAuthInfo}
+          />
+        </View>
+        <View style={styles.btn}>
+          <Button
+            style={styles.btn}
+            title={i18n.t("showSuccessToast")}
+            onPress={showSuccessToast}
+          />
+        </View>
+        <View style={styles.btn}>
+          <Button
+            style={styles.btn}
+            title={i18n.t("showInfoToast")}
+            onPress={showInfoToast}
+          />
+        </View>
+        <View style={styles.btn}>
+          <Button
+            style={styles.btn}
+            title={i18n.t("showErrorToast")}
+            onPress={showErrorToast}
+          />
+        </View>
       </View>
     </>
   );
@@ -71,13 +82,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  toastsContainer: {
-    paddingHorizontal: 20,
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    alignItems: "center",
+  btn: {
+    marginVertical: 4,
+    backgroundColor: "black",
   },
 });
 

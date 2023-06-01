@@ -34,7 +34,7 @@ function LoginSetting() {
 
   function createRightContent() {
     const content = user.isAuthenticated ? (
-      <View>
+      <View style={styles.rightTitleContainer}>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
           {user.fullName}
         </Text>
@@ -43,7 +43,7 @@ function LoginSetting() {
         </Text>
       </View>
     ) : (
-      <View style={{ flex: 1, flexShrink: 1 }}>
+      <View style={styles.rightTitleContainer}>
         <Text style={[styles.title, { color: theme.colors.primary }]}>
           {i18n.t("appleSignInMessage")}
         </Text>
@@ -89,6 +89,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
+  },
+  rightTitleContainer: {
+    flex: 1,
+    flexShrink: 1,
+    justifyContent: "center",
   },
   title: {
     fontSize: 18,

@@ -167,9 +167,9 @@ export const getI18n = createSelector(
     let selectedLanguageCode = language;
     const supportedLanguageCodes = Object.keys(supportedLanguages);
 
-    if (!supportedLanguageCodes.indexOf(selectedLanguageCode)) {
+    if (supportedLanguageCodes.indexOf(selectedLanguageCode) < 0) {
       selectedLanguageCode = getLocales()[0].languageCode;
-      if (!supportedLanguageCodes.indexOf(selectedLanguageCode)) {
+      if (supportedLanguageCodes.indexOf(selectedLanguageCode) < 0) {
         selectedLanguageCode = supportedLanguageCodes[0];
       }
     }
